@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/global.css" />
+        <link rel="stylesheet" type="text/css" href="css/intro.css" />
+        <title>Hall of Heroes</title>
+        
+        <!-- jQuery library (served from Google) -->
+		<script src="js/slider/jquery.min.js"></script>
+		<!-- bxSlider Javascript file -->
+		<script src="js/slider/jquery.bxslider.min.js"></script>
+		<!-- bxSlider CSS file -->
+		<link href="js/slider/jquery.bxslider.css" rel="stylesheet" />
+    </head>
+    <body>
+        
+        <div class="wrapper">
+        
+        <!-- Attaches the script to the UL -->
+			<script type="text/javascript">
+			$(document).ready(function(){
+			$('.bxslider').bxSlider();
+			});
+			</script>
+            
+            <ul class="help bxslider">
+                <!-- Slide 1 -->
+                <li>
+                    <h1>Pick Your Heroes</h1>
+                    <div class="help_images"><img src="img/help_01.png" alt="two friends with dressed as super heroes" /></div>
+                    <div class="number"><p>1</p></div>
+                    <div class="description">
+                        <h2>Choose Your Favorite Hall Heroes</h2>
+                        <p>These are the folks that will get you out of a jam.</p>
+                    </div>
+                </li>
+                
+                <!-- Slide 2 -->
+               <li>
+                    <h1>In A Jam?</h1>
+                    <div class="help_images"><img src="img/help_02.png" alt="exclamation point in a circle" /></div>
+                   <div class="number"><p>2</p></div>
+                    <div class="description">
+                        <h2>Tap signal to call your nearest heroes</h2>
+                        <p>It doesn&rsquo;t matter if you need a walk from the library or a bar wignman.</p>
+                    </div>
+                </li>
+                
+                <!-- Slide 3 -->
+                <li>
+                    <h1>To The Rescue!</h1>
+                    <div class="help_images"><img src="img/help_03.png" alt="phone with a speach bubble that says help me" /></div>
+                    <div class="number"><p>3</p></div>
+                    <div class="description">
+                        <h2>If someone needs help, you&rsquo;ll be notified</h2>
+                        <p>You choose whether or not to help out someone in need.</p>
+                    </div>
+                </li>
+                
+                <!-- Slide 4 -->
+                <li>
+                    <h1>What&rsquo;s In It For Me?</h1>
+                    <div class="help_images"><img src="img/help_04.png" alt="sparkling trophy" /></div>
+                    <div class="number"><p>4</p></div>
+                    <div class="description">
+                        <h2>Besides braggin&rsquo; rights</h2>
+                        <p>Earn points as you travel to save a friend and trade them in on goodies at participating places around town.</p> 
+                    </div><br/>
+                    <div onclick="callOnboarding()">
+                        <h2><b><button>SIGN UP</button></b></h2>
+                    </div>
+                </li>
+                
+            </ul>
+        
+            
+        </div>
+        
+        
+        
+        
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            function callOnboarding()
+             {
+                window.location = "onboarding.html";
+             }
+            
+            
+            
+            app.initialize();
+            
+            function toggle_visibility(id) {
+               var e = document.getElementById(id);
+               if(e.style.display == 'block')
+                  e.style.display = 'none';
+               else
+                  e.style.display = 'block';
+            }
+        </script>
+            
+</body>
+        
+</html>

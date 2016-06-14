@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>map</title>
+</head>
+<body>
+    <script type="text/javascript" src="js/index.js"></script>
+    <div id="geolocation" style="width: 640px; height:800px;"></div>
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAJEYcu2isMiqqbNDxCOAhYhbL8Dk5G3T0"></script>
+    <script type="text/javascript">
+                        function init() {
+                            favoritesModule.getFavoriteHeroes();
+                            userModule.getUserInfo();
+                        }
+                        function callFeed()
+                        {
+                            window.location = "feed.html";
+                        }
+
+                        function callHome()
+                        {
+                            window.location = "home.html";
+                        }
+
+                        function callStore()
+                        {
+                            window.location = "store.html";
+                        }
+
+                        function callSignal()
+                        {
+                            window.location = "signal.html";
+                        }
+
+                        function callRedeem()
+                        {
+                            window.location = "redeem.html";
+                        }
+
+                        function callGreen()
+                        {
+                            window.location = "green.html";
+                        }
+                        function callMap() {
+                            window.location = "map.html";
+                        }
+                        app.initialize();
+
+                        function toggle_visibility(id) {
+                            var e = document.getElementById(id);
+                            if (e.style.display == 'block')
+                                e.style.display = 'none';
+                            else
+                                e.style.display = 'block';
+                        }
+    </script>
+    <nav>
+        <ul>
+            <li class="left-li"><button onClick="callHome()"><img src="img/home.png" /><br>Home</button></li>
+            <li class="left-li"><button onClick="callFeed()"><img src="img/feed.png" /><br>My Feed</button></li>
+            <span><li><button onclick="toggle_visibility('signal');"><img src="img/signal.png" /><br>Signal</button></li></span>
+            <li class="right-li"><button onClick="callStore()"><img src="img/store.png" /><br>Store</button></li>
+            <li class="right-li"><button onclick="callMap()"><img src="img/map.png" /><br>My Map</button></li>
+        </ul>
+    </nav>
+</body>
+</html>

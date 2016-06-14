@@ -1,0 +1,66 @@
+/* Intro */
+
+    .wrapper {
+        padding-top:0;
+        background-color: #309da8;
+        height:100vh;
+    }
+
+    .help {
+        background-color:transparent !important;
+    }
+
+    .active {
+        background: #f1a200 !important;
+    }
+
+    .help_images {
+        width:90%;
+        margin:2rem auto;
+    }
+
+    .number {
+        width: 20%;
+        height:0;
+        padding-bottom:20%;
+        margin: 0 3.5% 1rem;
+        overflow: hidden;
+        border-radius: 50%;
+        border: .4em solid #e9ae42;
+        float: left;
+        position:relative;
+    }
+
+    .number p {
+        width:100%;
+        text-align: center;
+        font-family: 'Raleway Bold', verdana, helvetica, arial, sans-serif;
+        font-weight:700;
+        font-size:4.375rem;
+        margin-top:35%;
+    }
+
+    .description {
+        float:left;
+        width:66.5%;
+    }
+
+    h1 {
+        margin-bottom:2rem;
+    }
+
+    h2 {
+        color:#fff;
+        text-align:left;
+        letter-spacing: 0.1rem;
+        font-size:2rem;
+    }
+
+    p {
+        color:#fff;
+        letter-spacing: 0.08rem;
+    }
+
+    
+
+    

@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "625558343336",
+    "project_id": "hallofheroes2"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625558343336:android:f36173e948059ccb",
+        "android_client_info": {
+          "package_name": "gcm.play.android.samples.com.gcmquickstart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCh1mWT0cL0uxamU1oT8WeiZTsrKXxPZyM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+    "configuration_version": "1"
+}

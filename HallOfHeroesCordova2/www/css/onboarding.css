@@ -1,0 +1,104 @@
+/* Onboarding */
+
+    .heroes {
+        width:90%;
+        margin:0 auto;
+    }
+
+    .HH-people {
+        width: 87%;
+        height: 0;
+        padding-bottom: 87%;
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: 50%;
+        border: .5rem solid #e9ae42;
+        background-color: #e9ae42;
+        position: relative;
+    }
+
+    .HH-hero {
+        width: 30%;
+        float: left;
+        margin: .75rem 5% .75rem 0%;
+        position: relative;
+    }
+
+    .HH-hero:nth-of-type(3) {
+        margin: .75rem 0% .75rem 0%;
+    }
+
+    .plus-sign {
+        position: absolute;
+        top: .25rem;
+        left: 72%;
+        z-index: 80;
+    }
+
+    .profile-img {
+        margin:0 auto;
+        float: none;
+        width:100%;
+        padding-bottom:100%;
+    }
+
+    .profile-main {
+        position:relative;
+        width:30%;
+        overflow:visible;
+    }
+
+    label {
+        margin:1rem 5%;
+        color:#e9ae42;
+        font-family: 'Raleway Bold', verdana, helvetica, arial, sans-serif;
+        font-weight:700;
+        margin: 2rem 0 0 5%;
+        text-align: left;
+        font-size: 2.125rem;
+        clear: both;
+    }
+
+    h3 {
+        color:#e9ae42;
+    }
+
+    h2 {
+        color:#309da8;
+        font-size:1.5rem;
+        margin-top:0;
+        text-align:left;
+        margin-left:5%;
+    }
+
+/* forms */
+
+    input {
+        width:90%;
+        margin:2rem 5% 2rem 5%;
+        box-sizing: border-box;
+        border-radius: 5px;
+        
+        font-family: 'Raleway Bold', verdana, helvetica, arial, sans-serif;
+        font-size: 2rem;
+        color: #353133;
+        padding: .5rem 2%;
+        border-color:#1d4763;
+    }
+
+    select {
+        width:90%;
+        margin:1rem 5% 1rem 5%;
+        box-sizing: border-box;
+        border-radius: 5px;
+        
+        font-family: 'Raleway Bold', verdana, helvetica, arial, sans-serif;
+        font-size: 2rem;
+        color: #353133;
+        padding: .5rem 2%;
+    }
+
+    option {
+        
+    }
+

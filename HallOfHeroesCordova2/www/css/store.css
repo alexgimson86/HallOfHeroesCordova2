@@ -1,0 +1,70 @@
+/* Main Store list */
+.store {
+    width: 90%;
+    margin: 1em auto;
+    clear: both;
+}
+
+.store-img {
+    width: 35%;
+    float: left;
+}
+
+.store-text {
+    width: 65%;
+    float: left;
+}
+
+p {
+    margin-left:5%;
+    margin-bottom:0;
+}
+
+.store-points {
+    margin-top:0;
+    font-size:1.25em;
+    color: #f1a200;
+}
+
+/* Redeem Coupon */
+.back {
+    position:absolute;
+    width:8%;
+    left:3%;
+    top:1.5rem;
+    max-width:35px;
+}
+
+.redeem-code {
+    width: 100%;
+    color: #000;
+    font-size: 1.5rem;
+}
+
+
+.redeem-img {
+    width: 50%;
+    margin: 0 auto;
+    clear: both;
+}
+
+.redeem-text {
+    width: 100%;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.redeem-button {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.coupon {
+    width: 50%;
+    text-align: center;
+    font-size: 1.75rem;
+    border: .125em solid #000;
+    padding: .5em;
+    margin: 0 25%;
+    color: #000;
+}

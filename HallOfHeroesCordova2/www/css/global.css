@@ -1,0 +1,409 @@
+/************************* Global CSS ****************************/
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    background-color:#E4E4E4;
+    background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #A7A7A7),
+        color-stop(0.51, #E4E4E4)
+    );
+    background-attachment:fixed;
+    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-size:12px;
+    height:100%;
+    margin:0px;
+    padding:0px;
+    width:100%;
+}
+
+/* Portrait layout (default) */
+.app {
+    background:url(../img/logo.png) no-repeat center top; /* 170px x 200px */
+    position:absolute;             /* position in the center of the screen */
+    left:50%;
+    top:50%;
+    height:50px;                   /* text area height */
+    width:225px;                   /* text area width */
+    text-align:center;
+    padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
+    margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
+                                   /* offset horizontal: half of text area width */
+}
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
+    .app {
+        background-position:left center;
+        padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
+        margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
+                                      /* offset horizontal: half of image width and text area width */
+    }
+}
+
+html {font-size:10px;}
+
+
+
+/* Load Fonts */
+    @font-face {
+     font-family: 'Merriweather Regular';
+     src: url('../fonts/Merriweather-Regular.ttf') format('truetype');
+     font-weight: 400;
+    }
+
+    @font-face {
+     font-family: 'Raleway Bold';
+     src: url('../fonts/Raleway-Bold.ttf') format('truetype');
+     font-weight: 700;
+    }
+
+    @font-face {
+     font-family: 'Raleway Medium';
+     src: url('../fonts/Raleway-Medium.ttf') format('truetype');
+     font-weight: 500;
+    }
+
+/* General */
+    .wrapper {
+        width: 100%;
+        margin: 0 auto;
+        padding-top: 60pt;
+        padding-bottom: 70pt;
+        background-color: #fff;
+        overflow: hidden;
+        position: relative;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    button {
+        background-color: transparent;
+        border: none;
+        margin: 0;
+    }
+
+/* Top Title Bar */
+    .header {
+        width: 100%;
+        position: fixed;
+        background-color: #309da8;
+        z-index: 999;
+        height: 44pt;
+    }
+
+
+/* Bottom Tab Bar Navigation */
+    nav {
+        width: 100%;
+        background-color: #30a3ae;
+        position: fixed;
+        bottom: 0;
+        margin: 0 auto;
+        /*height: 49pt;*/
+        z-index:100;
+        padding-top:5pt;
+        overflow: visible;
+    }
+
+    nav ul {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        margin:0 auto;
+        overflow: visible;
+    }
+
+    nav li {
+        width: 20%;
+        /*height:0;
+        padding-bottom:17%;*/
+        list-style: none;
+        color: #fff;
+        float:left;
+       
+    }
+
+    nav li img {
+        margin:0 auto;
+        width:80%;
+    }
+
+    .signal_button {
+        position:absolute;
+        top: -2.15rem;
+        left:0;
+        right:0;
+        margin:0 auto;
+        box-sizing: border-box;
+        text-align: center;
+        border-radius: 50%;
+        overflow:hidden;
+        border-width:1rem;
+        border-style:solid;
+        border-color:#30a3ae;
+        background-color: #30a3ae;
+        width:20%;
+    }
+
+    .signal_text {
+        margin-top:4rem;
+        width:100%;
+        text-align: center;
+    }
+
+/* Emergency Signal Dialog */
+    .signal {
+        border-radius: 50%;
+        width: 85px;
+        height: 85px;
+        background-color: red;
+        float: left;
+        margin: .75rem 5% .75rem 0;
+    }
+
+    .signal h3 {
+        color: #fff;
+        font-size: 3rem;
+        font-weight: bold;
+        margin: .65rem 37%;
+    }
+
+    #signal {
+        display: none;
+    }
+
+    .signal-codes {
+        background-color: #f61a1a;
+        width: 90%;
+        position: fixed;
+        top: 7rem;
+        left: 5%;
+        z-index: 999;
+        border-radius: 3%;
+    }
+
+    .signal-codes img {
+        width: 50%;
+        margin: 1rem 0 0;
+    }
+
+    .signal-codes h3 {
+        text-align: center;
+        color: #fff;
+        font-size: 1.75rem;
+        margin: 0;
+        padding: .25rem 0 .75rem;
+    }
+
+    .emergency {
+        position: fixed;
+        background-color: #f61a1a;
+        width: 90%;
+        bottom: 10rem;
+        left: 5%;
+        z-index: 999;
+        border-radius: 3%;
+    }
+
+    .signal-options {
+        width: 90%;
+        background-color: #fff;
+        margin: .5rem 5% 1rem;
+        border-radius: 3%;
+    }
+
+    .signal-options h2 {
+        font-size: 2.25em;
+        text-align: center;
+        padding: .5rem 0 .25rem;
+        margin: 0;
+    }
+
+    .signal-options h4 {
+        font-size: 1.25rem;
+        color: #000;
+        text-align: center;
+        margin: 0;
+        padding-bottom: .65rem
+    }
+
+    .red-signal {
+        margin-bottom: 1.75rem;   
+    }
+
+    .green {
+        color: #3c6819;   
+    }
+
+    .yellow {
+        color: #d1c100;
+    }
+
+    .red {
+        color: #f61a1a;
+    }
+
+    .emergency h2 {
+        color: #fff;
+         font-size: 2.25rem;
+        text-align: center;
+    }
+
+/* Profile */
+    .profile-main {
+        width: 100%;
+        margin: 0 auto;
+        overflow:hidden;
+    }
+
+    .award {
+        position:relative;
+        width: 20%;
+        float: left;
+        margin: 1.5rem 5%;
+    }
+
+    .award p {
+        color:#0f4655;
+        font-size:1.5rem;
+        text-align: center;
+        margin:0;
+    }
+
+    .points {
+        position:absolute;
+        width:100%;
+
+        color:#fff;
+        font-family: 'Raleway Bold', verdana, helvetica, arial, sans-serif;
+        font-weight:700;
+        text-align:center;
+        font-size: 2.1875rem;
+        letter-spacing: .05rem;
+        top:.25rem;
+    }
+
+    .profile-img {
+        width: 30%;
+        height:0;
+        padding-bottom:30%;
+        margin: 0 3.5% 1rem;
+        overflow: hidden;
+        border-radius: 50%;
+        border: .5em solid #e9ae42;
+        background-color: #e9ae42;
+        float: left;
+        position:relative;
+    }
+
+    .disclaimer-button {
+        width: 100%;
+        color: #ffffff;
+        font-size: 1.875rem;
+        margin: 2.5rem auto 0 auto;
+        background-color: #b14130;
+        padding:2rem 0;
+    }
+
+
+
+/* Type */
+    h1 {
+        font-family: 'Raleway Bold', verdana, helvetica, arial, sans-serif;
+        font-weight:700;
+        width: 100%;
+        text-align: center;
+        font-size: 1.875rem;
+        color:#fff;
+        margin-top:1.8rem;
+        letter-spacing: .1rem;
+    }
+
+    h2 {
+        font-family: 'Merriweather Regular', Georgia, 'Times New Roman', times, serif;
+        font-weight:400;
+        color: #1d4763;
+        text-align:center;
+        font-size: 2.1875rem;
+        margin: 1rem auto; 
+        clear:both;
+    }
+
+    h3 {
+        font-family: 'Raleway Bold', verdana, helvetica, arial, sans-serif;
+        font-weight:700;
+        color:#b14130;
+        margin: 2rem 0 0 5%;
+        text-align: left;
+        font-size: 2.125rem;
+        clear: both;
+    }
+
+
+    h4 {
+        font-family: 'Merriweather Regular', Georgia, 'Times New Roman', times, serif;
+        font-weight:400;
+        color: #1d4763;
+        text-align:center;
+        font-size: 1.25rem;
+        margin:.5rem 0;
+    }
+
+    h5 {
+        font-family: 'Raleway Medium', verdana, helvetica, arial, sans-serif;
+        font-weight:500;
+        color:#309da8;
+        text-align: center;
+        font-size: 1.5rem;
+        margin:0;
+    }
+
+    h6 {
+        font-family: 'Raleway Medium', verdana, helvetica, arial, sans-serif;
+        font-weight:500;
+        color:#ffffff;
+        margin:0;
+        font-size:1rem;
+    }
+
+    
+    p {
+        font-family: 'Merriweather Regular', Georgia, 'Times New Roman', times, serif;
+        font-weight:400;
+        color: #353133;
+        font-size: 1.25rem;
+        line-height: 2rem;
+    }   

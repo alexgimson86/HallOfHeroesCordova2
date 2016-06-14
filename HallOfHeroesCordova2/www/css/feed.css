@@ -1,0 +1,57 @@
+/* feed */
+.wrapper {
+    padding-top:6rem;
+}
+
+.feed {
+    width:90%;
+    margin:2rem auto;
+    border-bottom-style: solid; 
+    border-bottom-width:2px;
+    border-bottom-color:#979a9a;
+    padding-bottom:2rem;
+    overflow:hidden;
+}
+
+.feed-img {
+    width: 15%;
+    height: 0;
+    padding-bottom: 15%;
+    margin: 0 5% 0 0;
+    overflow: hidden;
+    border-radius: 50%;
+    border: .5rem solid #f1a200;
+    background-color: #f1a200;
+    position: relative;
+    float:left;
+}
+
+.feed-text {
+    width: 65%;
+    float: left;
+    margin: 1rem 0;
+    font-size: 1.15rem;
+    color: #656868;
+    float:left;
+}
+
+.like {
+    display:inline-block;
+    width:10%;
+    margin-left:5%;
+    vertical-align: bottom;
+}
+
+.name_highlight {
+    color: #f1a200;
+    font-weight: 700;
+}
+
+.feed-likes {
+    width: 100%;
+    float: right;
+}
+
+h5 {
+    text-align:right;
+}

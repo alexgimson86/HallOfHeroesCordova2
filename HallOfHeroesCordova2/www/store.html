@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Hall of Heroes</title>
+    </head>
+    <body>
+        
+        <div id="signal">
+                <div class="signal-codes">
+                <button onClick="callHome()">
+                    <img src="img/x.png" /></button>
+                <h3>My Signal is a...</h3>
+                <div class="signal-options" onClick="callGreen()">
+                    <h2 class="green">Code Green</h2>
+                    <h4 class="green">
+                        EX: I need a buddy to walk me home</h4>
+                </div>
+                <div class="signal-options" onclick="callYellow()">
+                    <h2 class="yellow">Code Yellow</h2>
+                    <h4 class="yellow">
+                        EX: I need a safe ride home</h4>
+                </div>
+                <div class="signal-options" onclick="callRed()">
+                    <h2 class="red">Code Red</h2>
+                    <h4 class="red">Ex: I am being followed</h4>
+                </div>
+                    </div>
+                <div class="emergency">
+                    <a href="tel:911"><h2>Call 9-1-1</h2></a>
+                    </div>
+            </div>
+        
+        <div class="header store-header">
+            <h1>Store</h1>
+               <div class="logo">
+                    <img src="img/disclaimer-logo.png" />
+                </div>
+                </div>
+        <div class="wrapper" id="profile-wrapper">
+            <div class="profile-main">
+                <img class="profile-icon1" src="img/trophy2.png" />
+                <!--<h3>5</h3>-->
+                <div class="profile-img store-profileimg">
+                    <img src="img/girl1.jpg" />
+                    </div>
+    
+                <div class="profile-name">
+                <h2  class="profile-text store-name">Jessica Wilson</h2>
+                </div>
+                </div>
+            
+            <div class="store" onClick="callRedeem()">
+                <div class="store-img">
+                    <img src="img/storeimg1.png" /></div>
+                <div class="store-text1">
+                    <h3>5 Hero Points<br><br>2 free scoops of ice cream at Rhea’s</h3>
+                </div>    
+                </div>
+            
+            <div class="store">
+                <div class="store-img">
+                    <img src="img/storeimg2.png" /></div>
+                <div class="store-text2">
+                    <h3>10 Hero Points<br><br>1 classic burger combo at Railyard<br></h3>
+                </div>    
+                </div>
+            
+            <div class="store">
+                <div class="store-img">
+                    <img src="img/storeimg3.png" /></div>
+                <div class="store-text1">
+                    <h3>20 Hero Points<br><br>1 free game at Sunset Bowling Lanes</h3>
+                </div>    
+                </div>
+            
+            <div class="store">
+                <div class="store-img">
+                    <img src="img/storeimg4.png" /></div>
+                <div class="store-text2">
+                    <h3>30 Hero Points<br><br>1 free t-shirt from the University Bookstore</h3>
+                </div>    
+                </div>
+            
+            <div class="store">
+                <div class="store-img">
+                    <img src="img/storeimg5.png" /></div>
+                <div class="store-text1">
+                    <h3>40 Hero Points<br><br>1 free fill up at the Yellow Store</h3>
+                </div>    
+                </div>
+            
+            <div class="store">
+                <div class="store-img">
+                    <img src="img/storeimg6.png" /></div>
+                <div class="store-text2">
+                    <h3>50 Hero Points<br><br>$100 HEB giftcard<br><br></h3>
+                </div>    
+                </div>
+            
+            <div class="store">
+                <div class="store-img">
+                    <img src="img/storeimg7.png" /></div>
+                <div class="store-text1">
+                    <h3>60 Hero Points<br><br>$100 Palmers dinner for two voucher</h3>
+                </div>    
+                </div>
+            
+            <div class="store">
+                <div class="store-img">
+                    <img src="img/storeimg8.png" /></div>
+                <div class="store-text2">
+                    <h3>70 Hero Points<br><br>1 free game at BlazerTag</h3>
+                </div>    
+                </div>
+            
+            <div class="store">
+                <div class="store-img">
+                    <img src="img/storeimg9.png" /></div>
+                <div class="store-text1">
+                    <h3>1 Super Shield<br><br>1 pair of shoes from Vans Outlet Store</h3>
+                </div>    
+                </div>
+            
+                </div>
+            
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            function callFeed()
+             {
+                window.location = "feed.html";
+             }
+            
+            function callHome()
+             {
+                window.location = "home.html";
+             }
+            
+            function callStore()
+             {
+                window.location = "store.html";
+             }
+            
+            function callSignal()
+             {
+                window.location = "signal.html";
+             }
+            
+            function callRedeem()
+            {
+                window.location = "redeem.html";   
+            }
+            
+            function callGreen()
+            {
+                window.location = "green.html";   
+            }
+            function callYellow()
+            {
+                window.location = "yellow.html";
+            }
+            function callRed()
+            {
+                window.location = "red.html";
+            }
+            
+            app.initialize();
+            
+            function toggle_visibility(id) {
+               var e = document.getElementById(id);
+               if(e.style.display == 'block')
+                  e.style.display = 'none';
+               else
+                  e.style.display = 'block';
+            }
+        </script>
+    </div>
+        <nav>
+            <ul>
+                <li class="left-li"><button onClick="callHome()"><img src="img/home.png" /><br>Home</button></li>
+                <li class="left-li"><button onClick="callFeed()"><img src="img/feed.png" /><br>My Feed</button></li>
+                
+                <span><li><button onclick="toggle_visibility('signal');"><img src="img/signal.png" /><br>Signal</button></li></span>
+                
+                    <li class="right-li"><button onClick="callStore()"><img src="img/store.png" /><br>Store</button></li>
+                    <li class="right-li"><button><img src="img/map.png" /><br>My Map</button></li>
+                    
+            </ul>
+        
+        
+        </nav>
+</body>
+        
+</html>

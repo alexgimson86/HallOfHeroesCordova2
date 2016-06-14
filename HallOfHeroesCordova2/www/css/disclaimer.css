@@ -1,0 +1,26 @@
+/* Disclaimer */
+    .wrapper {
+        padding-bottom:0;
+    }
+
+    .disclaimer-logo {
+        width: 40%;
+        margin: 0 auto;
+    }
+
+
+    p {
+        margin-left:5%;
+        margin-right:5%;
+    }
+
+    form {
+        text-align:center;
+        font-family: 'Merriweather Regular', Georgia, 'Times New Roman', times, serif;
+        font-weight:400;
+        color: #353133;
+        font-size: 1.25rem;
+        line-height: 2rem; 
+    }
+
+

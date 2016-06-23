@@ -3,7 +3,10 @@ var userModule = (function ($){
      
     //private
     var createUserMarkup = function(userArray){
-        userArray.forEach(function(dat){
+        userArray.forEach(function (dat) {
+            sessionStorage.setItem('firstName', dat.firstName);
+            sessionStorage.setItem('lastName', dat.lastName);
+            sessionStorage.setItem('url', dat.avatarUrl);
             $('.profile-main')
                     .append('<span class="trophy-point-style">'+ dat.userPoints + '</span>\
                              <img class="profile-icon1" id="trophyImage" src="img/trophy.png" />\
@@ -24,7 +27,7 @@ var userModule = (function ($){
               url: "http://www.hallofheroesapp.com/php/user.php",
               dataType: "json",
               data: {userId : userId},
-              success: function(response){
+              success: function (response) {
                 createUserMarkup(response);
               },
               error: function(response){

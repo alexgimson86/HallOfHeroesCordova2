@@ -31,6 +31,9 @@
     <title>Hall of Heroes</title>
 </head>
 <body>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script async defer
+            src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD-vBeqieztqoeRYaEXeIgjkTIMgq38ukQ"></script>
     <script src="js/jquery-2.2.3.min.js"></script>
     <script src="js/jquery.mobile-1.4.5.min.js"></script>
     <script type="text/javascript" src="js/favoritesModule.js"></script>
@@ -38,6 +41,8 @@
     <script type="text/javascript" src="js/updateLatLongModule.js"></script>
     <script type="text/javascript" src="js/getClosestHeroesModule.js"></script>
     <script type="text/javascript" src="js/sendPush.js"></script>
+    <script type="text/javascript" src="js/savePushRegistration.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
     
    <!--<div id="geolocation" style="width: 640px; height:1136px;"></div>-->
     <div id="signal">
@@ -153,9 +158,6 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD-vBeqieztqoeRYaEXeIgjkTIMgq38ukQ"></script>
         <script type="text/javascript">
             function init() {
                 favoritesModule.getFavoriteHeroes();
@@ -182,7 +184,8 @@
             }
 
             function callGreen() {
-                sendPush();
+                var userName = sessionStorage.getItem('firstName') + ' ' + sessionStorage.getItem('lastName');
+                sendPush("green",userName);
             }
             function callMap()
             {
@@ -190,11 +193,13 @@
             }
             function callYellow()
             {
-                window.location = "yellow.html";
+                var userName = sessionStorage.getItem('firstName') + ' ' + sessionStorage.getItem('lastName');
+                sendPush("yellow", userName);
             }
             function callRed()
             {
-                window.location = "red.html";
+                var userName = sessionStorage.getItem('firstName') + ' ' + sessionStorage.getItem('lastName');
+                sendPush("red", userName);
             }
             app.initialize();
             getClosestHeroesModule.getAllHeroesInfo();

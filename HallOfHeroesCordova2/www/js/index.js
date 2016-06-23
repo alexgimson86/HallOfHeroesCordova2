@@ -17,8 +17,9 @@
  * under the License.
  */
 var app = {
-    deviceRegistered : false,
-   // marker: null,
+    map : null,
+    initCheck : sessionStorage.getItem("initializationCheck"),
+    marker: null,
     // Application Constructor
     initialize: function () {
         this.bindEvents();
@@ -44,27 +45,34 @@ var app = {
         }, 10000);
         navigator.geolocation.getCurrentPosition(app.onInitialSuccess, app.onError);
 
-        if (app.deviceRegistered === false) {
+        if (app.initCheck === "0") {
             window.plugins.PushbotsPlugin.initialize("5758e8cd4a9efa067f8b4567", { "android": { "sender_id": "625558343336" } });
 
-            window.plugins.PushbotsPlugin.on("notification:received", function (data) {
-                console.log("received:" + JSON.stringify(data));
-            });
-
-            // Should be called once the notification is clicked
-            window.plugins.PushbotsPlugin.on("notification:clicked", function (data) {
-                console.log("clicked:" + JSON.stringify(data));
-            });
             // Should be called once the device is registered successfully with Apple or Google servers
             window.plugins.PushbotsPlugin.on("registered", function (token) {
                 app.deviceRegistered = true;
-                console.log(token);
+                alert(token);
+                savePushRegistration(token);
             });
 
             window.plugins.PushbotsPlugin.getRegistrationId(function (token) {
                 console.log("Registration Id:" + token);
             });
+            sessionStorage.setItem("initializationCheck", 1);
         }
+        window.plugins.PushbotsPlugin.on("notification:received", function (data) {
+            alert("JSON data received: " + JSON.stringify(data));
+        });
+        // Should be called once the notification is clicked
+        window.plugins.PushbotsPlugin.on("notification:clicked", function (data) {
+            alert("here is json data " + JSON.stringify(data));
+            if (data.msg == "green")
+                window.location = "green.html";
+            else if (data.msg == "yellow")
+                window.location = "yellow.html";
+            else if (data.msg = "red");
+            window.location = "red.html";
+        });
     },
     onSuccess: function(position){
         var longitude = position.coords.longitude;
@@ -72,6 +80,20 @@ var app = {
         var latLong = new google.maps.LatLng(latitude, longitude);
         sessionStorage.setItem("latitude", latitude);
         sessionStorage.setItem("longitude", longitude);
+
+        /*var mapOptions = {
+            center: latLong,
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };*/
+        //var map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
+        /*if (app.marker) {
+            app.marker.setPosition(latLong);
+            app.map.setCenter(latLong);
+        }*/
+        /*if (app.marker) {
+            app.marker.setCenter(latLong);
+        }*/
         //alert("latitude: " + latitude + "longitude: " + longitude);
     },
     onInitialSuccess: function(position){
@@ -80,21 +102,40 @@ var app = {
         var latLong = new google.maps.LatLng(latitude, longitude);
         sessionStorage.setItem("latitude", latitude);
         sessionStorage.setItem("longitude", longitude);
-       // alert("latitude: " + latitude + "longitude: " + longitude);
-
+        //alert("latitude: " + latitude + "longitude: " + longitude);
+            
         var mapOptions = {
             center: latLong,
             zoom: 16,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        var map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
-        map.setCenter(latLong);
-        var marker = new google.maps.Marker({
-            position: latLong,
-            map: map,
-            title: 'your location'
-        });
+        if (google) {
+            app.map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
+        }
+        //app.map.setCenter(latLong);
+        var marker;
+        if (app.map) {
+                marker = new google.maps.Marker({
+                position: latLong,
+                map: app.map,
+                title: 'your location'
+            });
+        }
         app.marker = marker;
+        if (app.marker) {
+            var watchID = navigator.geolocation.watchPosition(function (position) {
+                app.marker.setPosition(
+                    new google.maps.LatLng(
+                        position.coords.latitude,
+                        position.coords.longitude)
+                );
+                var latlng = new google.maps.LatLng(
+                        position.coords.latitude,
+                        position.coords.longitude);
+                app.map.setCenter(latlng);
+                //app.map.panTo(app.marker.getPosition());
+            });
+        }
     },
 
     onError: function (error) {

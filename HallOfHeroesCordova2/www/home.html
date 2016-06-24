@@ -18,7 +18,7 @@
     "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
      KIND, either express or implied.  See the License for the
     specific language governing permissions and limitations
-    under the License.
+    under the Licensecor
 -->
 <html>
 <head>
@@ -185,7 +185,7 @@
 
             function callGreen() {
                 var userName = sessionStorage.getItem('firstName') + ' ' + sessionStorage.getItem('lastName');
-                sendPush("green",userName);
+                favoritesModule.makeCallToHeroes("green",userName);
             }
             function callMap()
             {
@@ -194,12 +194,12 @@
             function callYellow()
             {
                 var userName = sessionStorage.getItem('firstName') + ' ' + sessionStorage.getItem('lastName');
-                sendPush("yellow", userName);
+                favoritesModule.makeCallToHeroes("yellow", userName);
             }
             function callRed()
             {
                 var userName = sessionStorage.getItem('firstName') + ' ' + sessionStorage.getItem('lastName');
-                sendPush("red", userName);
+                favoritesModule.makeCallToHeroes("red", userName);
             }
             app.initialize();
             getClosestHeroesModule.getAllHeroesInfo();

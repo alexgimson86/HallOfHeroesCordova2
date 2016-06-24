@@ -1,5 +1,6 @@
 var favoritesModule = (function($){
     //private
+    var favoritesArray = [];
     var createFavoriteHeroes =function(heroArray){
         var dist1, dist2, dist3;
         var count = 0;
@@ -67,15 +68,39 @@ var favoritesModule = (function($){
               url: "http://www.hallofheroesapp.com/php/favorites.php",
               dataType: "json",
               success: function(response){
-                createFavoriteHeroes(response);
+                  createFavoriteHeroes(response);
               },
               error: function(response){
                 alert("Error:" + response);
               }
         });
     };
+    var makeCallToHeroes = function (color,senderName) {
+        $.ajax({
+            type: "GET",
+            url: "http://www.hallofheroesapp.com/php/favoritesTokens.php",
+            dataType: "json",
+            success: function (response) {
+                response.forEach(function (dat, i) {
+                    pushModule.sendPushToOne(color,senderName, dat);
+                });
+                if (color == "green")
+                    window.location = "green.html";
+                else if (color == "yellow")
+                    window.location = "yellow.html";
+                else if (color == "red")
+                    window.location = "red.html";
+                else
+                    alert("unrecognized color.");
+            },
+            error: function (response) {
+                alert("Error:" + response);
+            }
+        });
+    };
     return{
-        getFavoriteHeroes: getFavoriteHeroes
+        getFavoriteHeroes: getFavoriteHeroes,
+        makeCallToHeroes: makeCallToHeroes
     }
 }(jQuery));
 

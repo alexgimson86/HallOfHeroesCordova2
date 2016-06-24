@@ -45,33 +45,45 @@ var app = {
         }, 10000);
         navigator.geolocation.getCurrentPosition(app.onInitialSuccess, app.onError);
 
-        if (app.initCheck === "0") {
-            window.plugins.PushbotsPlugin.initialize("5758e8cd4a9efa067f8b4567", { "android": { "sender_id": "625558343336" } });
+        //if (app.initCheck === "0") {
+        window.plugins.PushbotsPlugin.initialize("5758e8cd4a9efa067f8b4567", { "android": { "sender_id": "625558343336" } });
 
-            // Should be called once the device is registered successfully with Apple or Google servers
-            window.plugins.PushbotsPlugin.on("registered", function (token) {
-                app.deviceRegistered = true;
-                alert(token);
-                savePushRegistration(token);
-            });
+        // Should be called once the device is registered successfully with Apple or Google servers
+        window.plugins.PushbotsPlugin.on("registered", function (token) {
+            app.deviceRegistered = true;
+            alert(token);
+            savePushRegistration(token);
+        });
 
-            window.plugins.PushbotsPlugin.getRegistrationId(function (token) {
-                console.log("Registration Id:" + token);
-            });
-            sessionStorage.setItem("initializationCheck", 1);
-        }
+        window.plugins.PushbotsPlugin.getRegistrationId(function (token) {
+            console.log("Registration Id:" + token);
+        });
+            
+            //sessionStorage.setItem("initializationCheck", 1);
+        //}
         window.plugins.PushbotsPlugin.on("notification:received", function (data) {
-            alert("JSON data received: " + JSON.stringify(data));
+            alert("JSON data received in init: " + JSON.stringify(data));
         });
         // Should be called once the notification is clicked
         window.plugins.PushbotsPlugin.on("notification:clicked", function (data) {
-            alert("here is json data " + JSON.stringify(data));
-            if (data.msg == "green")
-                window.location = "green.html";
-            else if (data.msg == "yellow")
-                window.location = "yellow.html";
-            else if (data.msg = "red");
-            window.location = "red.html";
+            //alert("here is json data in init" + JSON.stringify(data));
+            if (window.confirm("do you want to accept this call?")) {
+                //window.location = "green.html";
+                if (data.message.indexOf("green") > -1) {
+                    alert("hit green");
+                    window.location = "green.html";
+                }
+                else if (data.message.indexOf("yellow") > -1) {
+                    alert("hit green");
+                    window.location = "yellow.html";
+                }
+                else if (data.message.indexOf("red") > -1) {
+                    alert("alert");
+                    window.location = "red.html";
+                }
+                else
+                    alert("message just aint right");
+            }
         });
     },
     onSuccess: function(position){
@@ -143,3 +155,4 @@ var app = {
     }
     // Update DOM on a Received Event
 };
+

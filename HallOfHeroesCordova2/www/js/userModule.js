@@ -1,6 +1,4 @@
 var userModule = (function ($){
-    
-     
     //private
     var createUserMarkup = function(userArray){
         userArray.forEach(function (dat) {
@@ -8,16 +6,14 @@ var userModule = (function ($){
             sessionStorage.setItem('lastName', dat.lastName);
             sessionStorage.setItem('url', dat.avatarUrl);
             $('.profile-main')
-                    .append('<span class="trophy-point-style">'+ dat.userPoints + '</span>\
-                             <img class="profile-icon1" id="trophyImage" src="img/trophy.png" />\
-                             <!--<h3>5</h3>--><div class="profile-img"><img src="'+ dat.avatarUrl + '" />\
-                             </div><div class="profile-icon2"><img src="img/edit.png" /><h3>Edit</h3>\
-                             </div><div class="profile-name">\
-                             <h2  class="profile-text">'+ dat.firstName + ' ' + dat.lastName + '</h2></div>');
-                                       
+                    .append(' <div class="award"><div class="points">' +  dat.userPoints  + '</div> \
+                                    <img src="img/trophy.png" /> \
+                                    <p>Points</p> \
+                                    </div> \
+                                    <div class="profile-img"><img src="' + dat.avatarUrl + '" /></div> \
+                                    <h2> ' + dat.firstName + ' ' + dat.lastName + '</h2>');
         })
     };
-    
     //public
     var getUserInfo = function(){
         
@@ -35,9 +31,6 @@ var userModule = (function ($){
               }
         });
     };
-    //private
-    
-   
     
     return {
         getUserInfo: getUserInfo

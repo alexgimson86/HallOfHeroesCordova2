@@ -102,3 +102,19 @@
         
     }
 
+    p.sign_in {
+        margin-top:0;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .sign_in a {
+        text-decoration:underline;
+        color:#b14130;
+    }
+
+    .disclaimer-logo {
+            width: 40%;
+            margin: 0 auto;
+        }
+

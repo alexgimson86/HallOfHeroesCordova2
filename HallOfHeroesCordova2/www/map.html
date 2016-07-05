@@ -20,126 +20,125 @@
     under the License.
 -->
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/global.css" />
-        <link rel="stylesheet" type="text/css" href="css/feed.css" />
-        
-        <title>Hall of Heroes</title>
-    </head>
-    <body>
-        
-        <div id="signal">
-                <div class="signal-codes">
-                <button onClick="callHome()">
-                    <img src="img/x.png" /></button>
-                <h3>My Signal is a...</h3>
-                <div class="signal-options" onClick="callGreen()">
-                    <h2 class="green">Code Green</h2>
-                    <h4 class="green">
-                        EX: I need a buddy to walk me home</h4>
-                </div>
-                <div class="signal-options" onclick="callYellow()">
-                    <h2 class="yellow">Code Yellow</h2>
-                    <h4 class="yellow">
-                        EX: I need a safe ride home</h4>
-                </div>
-                <div class="signal-options" onclick="callRed()">
-                    <h2 class="red">Code Red</h2>
-                    <h4 class="red">Ex: I am being followed</h4>
-                </div>
-                    </div>
-                <div class="emergency">
-                    <a href="tel:911"><h2>Call 9-1-1</h2></a>
-                    </div>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <link rel="stylesheet" type="text/css" href="css/global.css" />
+    <link rel="stylesheet" type="text/css" href="css/feed.css" />
+    <script src="js/jquery-2.2.3.min.js"></script>
+    <script async defer
+            src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD-vBeqieztqoeRYaEXeIgjkTIMgq38ukQ"></script>
+    <script type="text/javascript" src="js/updateLatLongModule.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <title>Hall of Heroes</title>
+</head>
+<body>
+
+    <div id="signal">
+        <div class="signal-codes">
+            <button onClick="callHome()">
+                <img src="img/x.png" />
+            </button>
+            <h3>My Signal is a...</h3>
+            <div class="signal-options" onClick="callGreen()">
+                <h2 class="green">Code Green</h2>
+                <h4 class="green">
+                    EX: I need a buddy to walk me home
+                </h4>
+            </div>
+            <div class="signal-options">
+                <h2 class="yellow">Code Yellow</h2>
+                <h4 class="yellow">
+                    EX: I need a safe ride home
+                </h4>
+            </div>
+            <div class="signal-options red-signal">
+                <h2 class="red">Code Red</h2>
+                <h4 class="red">Ex: I am being followed</h4>
+            </div>
         </div>
-                    
-        <!-- Global Header Starts Here -->
-        <div class="header">
-            <h1>Trouble Zones</h1>
+        <div class="emergency">
+            <h2>Call 9-1-1</h2>
         </div>
-        
+    </div>
+
+    <!-- Global Header Starts Here -->
+    <div class="header">
+        <h1>Trouble Zones</h1>
+    </div>
+
+    <div class="wrapper">
         <div class="wrapper" id="geolocation" style="width: 500px; height:700px;">
         </div>
-        
-        <!-- Begin Global Navigation -->
-        <nav>
-            <ul>
-                <li><button onClick="callHome()"><img src="img/home_off.png" /><h6>Home</h6></button></li>
-                <li><button onClick="callFeed()"><img src="img/news_off.png" /><h6>News</h6></button></li>
-                
-                <li><button onclick="toggle_visibility('signal');"><img src="img/signal.png" class="signal_button" /><h6 class="signal_text">Signal</h6></button></li>
-                
-                <li><button onClick="callMap()"><img src="img/map_on.png" /><h6>Zones</h6></button></li>
-                <li><button onClick="callStore()"><img src="img/store_off.png" /><h6>Store</h6></button></li>
-                
-                    
-            </ul>
-        
-        
-        </nav>
-        <!-- End Global Navigation -->
-        <script src="js/jquery-2.2.3.min.js"></script>
-        <script async defer
-                src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD-vBeqieztqoeRYaEXeIgjkTIMgq38ukQ"></script>
-        <script type="text/javascript" src="js/updateLatLongModule.js"></script>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
+
+    </div>
+
+    <!-- Begin Global Navigation -->
+    <nav>
+        <ul>
+            <li><button onClick="callHome()"><img src="img/home_off.png" /><h6>Home</h6></button></li>
+            <li><button onClick="callFeed()"><img src="img/news_off.png" /><h6>News</h6></button></li>
+
+            <li><button onclick="toggle_visibility('signal');"><img src="img/signal.png" class="signal_button" /><h6 class="signal_text">Signal</h6></button></li>
+
+            <li><button onClick="callMap()"><img src="img/map_on.png" /><h6>Zones</h6></button></li>
+            <li><button onClick="callStore()"><img src="img/store_off.png" /><h6>Store</h6></button></li>
+
+
+        </ul>
+
+
+    </nav>
+    <!-- End Global Navigation -->
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <!-- <script type="text/javascript" src="js/index.js"></script>-->
+    <script type="text/javascript">
             function callFeed()
              {
                 window.location = "feed.html";
              }
-            
+
             function callHome()
              {
                 window.location = "home.html";
              }
-            
+
             function callStore()
              {
                 window.location = "store.html";
              }
-            
+
             function callSignal()
              {
                 window.location = "signal.html";
              }
-            
+
             function callRedeem()
             {
-                window.location = "redeem.html";   
+                window.location = "redeem.html";
             }
-            
+
             function callGreen()
             {
-                window.location = "green.html";   
+                window.location = "green.html";
             }
-            
+
             function callContacts()
             {
-                window.location = "contacts.html";   
+                window.location = "contacts.html";
             }
-            
+
             function callMap()
             {
-                window.location = "map.html";   
+                window.location = "map.html";
             }
-            function callYellow()
-            {
-                window.location = "yellow.html";
-            }
-            function callRed()
-            {
-                window.location = "red.html";
-            }
-            
+
             app.initialize();
-            
+
             function toggle_visibility(id) {
                var e = document.getElementById(id);
                if(e.style.display == 'block')
@@ -147,8 +146,8 @@
                else
                   e.style.display = 'block';
             }
-        </script>
-            
+    </script>
+
 </body>
-        
+
 </html>

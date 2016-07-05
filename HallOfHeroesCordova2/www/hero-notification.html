@@ -20,72 +20,74 @@
     under the License.
 -->
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hall of Heroes</title>
-    </head>
-    <body>
-        <div class="header hero-header">
-            <button class="green-img" onClick="callHome()">
-                <img src="img/x.png" /></button>
-            <div class="hero-signal">
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/global.css" />
+    <title>Hall of Heroes</title>
+</head>
+<body>
+    <div class="header hero-header">
+        <button class="green-img" onClick="callHome()">
+            <img src="img/x.png" />
+        </button>
+        <div class="hero-signal">
             <h1>NO FEAR!</h1>
-            
+
             <div class="HH-hero hero-HH">
                 <div class="HH-people hero-people">
                     <img src="img/girl2.jpg" />
                 </div>
-                    
-                </div>
+
+            </div>
             <h2>Hall Hero Dani is on the way!</h2>
-               
-                </div>
-            </div>
-        <div class="wrapper" id="profile-wrapper">
-            <div class="hero-map">
+
+        </div>
+    </div>
+    <div class="wrapper" id="profile-wrapper">
+        <div class="hero-map">
             <img src="img/full-map.png" />
-            </div>
-            
-       <script type="text/javascript" src="cordova.js"></script>
+        </div>
+
+        <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             function callFeed()
              {
                 window.location = "feed.html";
              }
-            
+
             function callHome()
              {
-                window.location = "home.html";
+                window.location = "index.html";
              }
-            
+
             function callStore()
              {
                 window.location = "store.html";
              }
-            
+
             function callSignal()
              {
                 window.location = "signal.html";
              }
-            
+
             function callRedeem()
             {
-                window.location = "redeem.html";   
+                window.location = "redeem.html";
             }
-            
+
             function callGreen()
             {
-                window.location = "green.html";   
+                window.location = "green.html";
             }
-            
+
             app.initialize();
-            
+
             function toggle_visibility(id) {
                var e = document.getElementById(id);
                if(e.style.display == 'block')
@@ -95,18 +97,20 @@
             }
         </script>
     </div>
-        <nav class="hero-signal-nav">
+    <nav class="hero-signal-nav">
         <ul>
-            <li class="left-li"><img src="img/phone.png" />
+            <li class="left-li">
+                <img src="img/phone.png" />
                 <br>9-1-1
             </li>
-            <li class="right-li"><img src="img/message.png" />
+            <li class="right-li">
+                <img src="img/message.png" />
                 <br>Hero Chat
             </li>
-        </ul>    
-        
-        
-        </nav>
+        </ul>
+
+
+    </nav>
 </body>
-        
+
 </html>

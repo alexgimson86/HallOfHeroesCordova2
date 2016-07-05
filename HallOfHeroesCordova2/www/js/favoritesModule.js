@@ -27,24 +27,45 @@ var favoritesModule = (function($){
         heroArray.forEach(function (dat, i) {
             if (i === 0) {
                 $('#favoriteHeroes')
-                     .html('<div class="HH-hero"><div class="plus-sign">+</div>\
-                        <div class="HH-people"><img src="' + dat.avatarUrl + '" />\
-                        </div><div class="HH-name"><h2>' + dat.firstName + ' ' + dat.lastName + '<br>\
-                        <span class="HH-miles">' + dist1 + " miles" + '</span></h2></div></div>');
+                     .html('<div class="HH-hero"> \
+                                <div class="plus-sign">\
+                                    <img src="img/plus.png" alt="edit favorite hero" onClick="callContacts()" />\
+                                </div>\
+                                <div class="HH-people">\
+                                    <img src="' + dat.avatarUrl + '" /> </div>\
+                                <div class="HH-name"> \
+                                    <h4>' + dat.firstName + ' ' + dat.lastName + '</h4>\
+                                    <h5>' + dist1 + " miles" + '</h5>\
+                                </div>\
+                             </div>');
             }
             else if (i === 1) {
                 $('#favoriteHeroes')
-                     .append('<div class="HH-hero"><div class="plus-sign">+</div>\
-                        <div class="HH-people"><img src="' + dat.avatarUrl + '" />\
-                        </div><div class="HH-name"><h2>' + dat.firstName + ' ' + dat.lastName + '<br>\
-                        <span class="HH-miles">' + dist2 + " miles" + '</span></h2></div></div>');
+                     .append('<div class="HH-hero"> \
+                                <div class="plus-sign">\
+                                    <img src="img/plus.png" alt="edit favorite hero" onClick="callContacts()" />\
+                                </div>\
+                                <div class="HH-people">\
+                                    <img src="' + dat.avatarUrl + '" /> </div>\
+                                <div class="HH-name"> \
+                                    <h4>' + dat.firstName + ' ' + dat.lastName + '</h4>\
+                                    <h5>' + dist2 + " miles" + '</h5>\
+                                </div>\
+                             </div>');
             }
             else {
                 $('#favoriteHeroes')
-                     .append('<div class="HH-hero"><div class="plus-sign">+</div>\
-                        <div class="HH-people"><img src="' + dat.avatarUrl + '" />\
-                        </div><div class="HH-name"><h2>' + dat.firstName + ' ' + dat.lastName + '<br>\
-                        <span class="HH-miles">' + dist3 + " miles" + '</span></h2></div></div>');
+                     .append('<div class="HH-hero"> \
+                                <div class="plus-sign">\
+                                    <img src="img/plus.png" alt="edit favorite hero" onClick="callContacts()" />\
+                                </div>\
+                                <div class="HH-people">\
+                                    <img src="' + dat.avatarUrl + '" /> </div>\
+                                <div class="HH-name"> \
+                                    <h4>' + dat.firstName + ' ' + dat.lastName + '</h4>\
+                                    <h5>' + dist3 + " miles" + '</h5>\
+                                </div>\
+                             </div>');
             }
        });
     };
@@ -84,6 +105,7 @@ var favoritesModule = (function($){
                 response.forEach(function (dat, i) {
                     pushModule.sendPushToOne(color,senderName, dat);
                 });
+                makeCallPending();
                 if (color == "green")
                     window.location = "green.html";
                 else if (color == "yellow")
@@ -95,6 +117,20 @@ var favoritesModule = (function($){
             },
             error: function (response) {
                 alert("Error:" + response);
+            }
+        });
+    };
+    var makeCallPending = function () {
+        $.ajax({
+            type: "POST",
+            url: "http://www.hallofheroesapp.com/php/setIfCallPending.php",
+            data: {isPending: 1},
+            dataType: "json",
+            success: function () {
+               // alert("pending saved");
+            },
+            error: function (response) {
+               // alert(response + "error");
             }
         });
     };

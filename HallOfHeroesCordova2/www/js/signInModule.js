@@ -2,8 +2,8 @@
     var signIn = function () {
         sessionStorage.setItem('initializationCheck', 0);
         //get the users txstate email and password from the text boxes in the html
-        var email = $('#txStateEmail').val();
-        var password = $('#userPassword').val();
+        var email = $('#user').val();
+        var password = $('#password').val();
         verifyInfo(email, password);
     };
     var verifyInfo = function (email, password) {

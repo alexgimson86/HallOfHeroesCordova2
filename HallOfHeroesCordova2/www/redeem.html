@@ -20,104 +20,149 @@
     under the License.
 -->
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hall of Heroes</title>
-    </head>
-    <body>
-        
-        <div id="signal">
-                <div class="signal-codes">
-                <button onClick="callHome()">
-                    <img src="img/x.png" /></button>
-                <h3>My Signal is a...</h3>
-                <div class="signal-options" onClick="callGreen()">
-                    <h2 class="green">Code Green</h2>
-                    <h4 class="green">
-                        EX: I need a buddy to walk me home</h4>
-                </div>
-                <div class="signal-options" onclick="callYellow()">
-                    <h2 class="yellow">Code Yellow</h2>
-                    <h4 class="yellow">
-                        EX: I need a safe ride home</h4>
-                </div>
-                <div class="signal-options" onclick="callRed()">
-                    <h2 class="red">Code Red</h2>
-                    <h4 class="red">Ex: I am being followed</h4>
-                </div>
-                    </div>
-                <div class="emergency">
-                    <a href="tel:911"><h2>Call 9-1-1</h2></a>
-                    </div>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <link rel="stylesheet" type="text/css" href="css/global.css" />
+    <link rel="stylesheet" type="text/css" href="css/store.css" />
+    <title>Hall of Heroes</title>
+</head>
+<body>
+
+    <div id="signal">
+        <div class="signal-codes">
+            <button onClick="callHome()">
+                <img src="img/x.png" />
+            </button>
+            <h3>My Signal is a...</h3>
+            <div class="signal-options" onClick="callGreen()">
+                <h2 class="green">Code Green</h2>
+                <h4 class="green">
+                    EX: I need a buddy to walk me home
+                </h4>
             </div>
-        
-        <div class="header">
+            <div class="signal-options" onclick="callYellow()">
+                <h2 class="yellow">Code Yellow</h2>
+                <h4 class="yellow">
+                    EX: I need a safe ride home
+                </h4>
+            </div>
+            <div class="signal-options red-signal" onclick="callRed()">
+                <h2 class="red">Code Red</h2>
+                <h4 class="red">Ex: I am being followed</h4>
+            </div>
+        </div>
+        <div class="emergency">
+            <a href="tel:911"><h2>Call 9-1-1</h2>
+        </div>
+    </div>
+
+    <!-- Global Header Starts Here -->
+    <div class="header">
+        <div class="back">
             <img onClick="callStore()" src="img/backarrow.png" />
-            <h1 id="redeem-h1">Redeem Coupon</h1>
-               <div class="logo">
-                    <img src="img/HH-logo.png" />
-                </div>
-                </div>
-        <div class="wrapper" id="profile-wrapper redeem-wrapper">
-            <div class="redeem-code">
-            <h2>Code: 32445</h2>
-            </div>
-            
-            <div class="redeem-img">
-            <img src="img/storeimg1.png" />
-            </div>
-            <article><h3>Rhea’s Ice Cream</h3><br>318 N LBJ Dr.<br>San Marcos, TX</article>
-            <h3 class="redeem-text">2 Free Scoops</h3>
-            <div class="redeem-button"> <button onClick="callStore()" class="coupon">Redeem Coupon</button>
-                </div>
-            
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
+        </div>
+        <h1>Rhea&rsquo; Ice Cream</h1><!-- Title of store goes here -->
+    </div>
+
+
+
+    <div class="wrapper">
+        <div class="redeem-img">
+            <img src="img/storeimg1.png" /> <!-- store image goes here -->
+        </div>
+
+
+
+
+        <div class="redeem-code">
+            <h2>Code: 32445</h2><!-- Code goes here either bar code image or text coupon code -->
+        </div>
+
+        <article>
+            <h3>Rhea&rsquo;s Ice Cream</h3>
+            <p>318 N LBJ Dr.<br />San Marcos, TX</p>
+        </article>
+
+        <h2 class="redeem-text">2 Free Scoops</h2>
+
+        <div class="redeem-button">
+            <button onClick="callStore()" class="coupon">Redeem Coupon</button><!-- points need to be deducted and dialog box triggered -->
+
+        </div>
+
+
+
+
+    </div>
+    <!-- Begin Global Navigation -->
+    <nav>
+        <ul>
+            <li><button onClick="callHome()"><img src="img/home_off.png" /><h6>Home</h6></button></li>
+            <li><button onClick="callFeed()"><img src="img/news_off.png" /><h6>News</h6></button></li>
+
+            <li><button onclick="toggle_visibility('signal');"><img src="img/signal.png" class="signal_button" /><h6 class="signal_text">Signal</h6></button></li>
+
+            <li><button onClick="callMap()"><img src="img/map_off.png" /><h6>Zones</h6></button></li>
+            <li><button onClick="callStore()"><img src="img/store_on.png" /><h6>Store</h6></button></li>
+
+        </ul>
+
+
+    </nav>
+    <!-- End Global Navigation -->
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
             function callFeed()
              {
                 window.location = "feed.html";
              }
-            
+
             function callHome()
              {
                 window.location = "home.html";
              }
-            
+
             function callStore()
              {
                 window.location = "store.html";
              }
-            
+
             function callSignal()
              {
                 window.location = "signal.html";
              }
-            
+
             function callRedeem()
             {
-                window.location = "redeem.html";   
+                window.location = "redeem.html";
             }
-            
+
             function callGreen()
             {
-                window.location = "green.html";   
+                window.location = "green.html";
             }
             function callYellow()
             {
                 window.location = "yellow.html";
             }
+
             function callRed()
             {
                 window.location = "red.html";
             }
+            function callMap()
+            {
+                window.location = "map.html";
+            }
+
             app.initialize();
-            
+
             function toggle_visibility(id) {
                var e = document.getElementById(id);
                if(e.style.display == 'block')
@@ -125,22 +170,14 @@
                else
                   e.style.display = 'block';
             }
-        </script>
-    </div>
-        <nav>
-            <ul>
-                <li class="left-li"><button onClick="callHome()"><img src="img/home.png" /><br>Home</button></li>
-                <li class="left-li"><button onClick="callFeed()"><img src="img/feed.png" /><br>My Feed</button></li>
-                
-                <span><li><button onclick="toggle_visibility('signal');"><img src="img/signal.png" /><br>Signal</button></li></span>
-                
-                    <li class="right-li"><button onClick="callStore()"><img src="img/store.png" /><br>Store</button></li>
-                    <li class="right-li"><button><img src="img/map.png" /><br>My Map</button></li>
-                    
-            </ul>
-        
-        
-        </nav>
+    </script>
+
+
+
+
+
+
+
 </body>
-        
+
 </html>

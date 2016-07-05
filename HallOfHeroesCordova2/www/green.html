@@ -20,68 +20,86 @@
     under the License.
 -->
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hall of Heroes</title>
-    </head>
-    <body>
-        <div class="header green-header">
-            <button class="green-img" onClick="callHome()">
-                <img src="img/x.png" /></button>
-            <div class="green-signal">
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <script async defer
+            src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD-vBeqieztqoeRYaEXeIgjkTIMgq38ukQ"></script>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/global.css" />
+    <title>Hall of Heroes</title>
+    <script src="js/jquery-2.2.3.min.js"></script>
+    <script src="js/getCallerLocation.js"></script>
+</head>
+<body>
+    <div class="header">
+        <button onClick="callHome()">
+            <img src="img/cancel.png" />
+        </button>
+        <div class="green-signal">
             <h1>CODE GREEN</h1>
-            
             <h2>Signaling Hall Heroes</h2>
-               
-                </div>
-            </div>
-        <div class="wrapper" id="profile-wrapper">
-            <div class="green-map" id="geolocation" style="width: 640px; height:400px;">
-                </div>
-        
-        <script src="js/jquery-2.2.3.min.js"></script>
-            <script async defer
-                    src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD-vBeqieztqoeRYaEXeIgjkTIMgq38ukQ"></script>  
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="wrapper" id="geolocation" style="width: 400px; height: 600px;">
+        </div>
+    </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/updateLatLongModule.js"></script>
         <script type="text/javascript">
+            var intervalId = window.setInterval(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "http://www.hallofheroesapp.com/php/checkIfCallPending.php",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response == 0) {
+                            clearInterval(intervalId);
+                            getHeroLocation();
+                        }
+                    },
+                    error: function (response) {
+                        //   alert("Error:" + response);
+                    }
+                });
+            }, 3000);
             function callFeed()
              {
                 window.location = "feed.html";
              }
-            
+
             function callHome()
              {
                 window.location = "home.html";
              }
-            
+
             function callStore()
              {
                 window.location = "store.html";
              }
-            
+
             function callSignal()
              {
                 window.location = "signal.html";
              }
-            
+
             function callRedeem()
             {
-                window.location = "redeem.html";   
+                window.location = "redeem.html";
             }
-            
+
             function callGreen()
             {
-                window.location = "green.html";   
+                window.location = "green.html";
             }
-            
+
             app.initialize();
-            
+
             function toggle_visibility(id) {
                var e = document.getElementById(id);
                if(e.style.display == 'block')
@@ -91,9 +109,9 @@
             }
         </script>
     </div>
-        <nav class="green-signal-nav">
-        <h3>Please wait...</h3>   
-        </nav>
+    <nav class="green-signal-nav">
+        <h3 id="heroName">Please wait...</h3>
+    </nav>
 </body>
-        
+
 </html>

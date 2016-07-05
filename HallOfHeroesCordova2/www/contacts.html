@@ -20,60 +20,57 @@
     under the License.
 -->
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/global.css" />
-        <link rel="stylesheet" type="text/css" href="css/contacts.css" />
-        <title>Hall of Heroes</title>
-    </head>
-    <body>
-        
-        
-                    
-        <!-- Global Header Starts Here -->
-        <div class="header">
-            <div class="cancel">
-                <img onClick="callHome()" src="img/cancel.png" /><!-- if screen is triggered from onboarding, then go back to onboarding screen instead of home -->
-            </div>
-            <h1>My Contacts</h1>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <link rel="stylesheet" type="text/css" href="css/global.css" />
+    <link rel="stylesheet" type="text/css" href="css/contacts.css" />
+    <title>Hall of Heroes</title>
+</head>
+<body>
+
+
+
+    <!-- Global Header Starts Here -->
+    <div class="header">
+        <div class="cancel">
+            <img onClick="callHome()" src="img/cancel.png" /><!-- if screen is triggered from onboarding, then go back to onboarding screen instead of home -->
         </div>
-        
-        <div class="wrapper">
-            <h3>A</h3> <!-- letter header goes here -->
-            
-            <!-- Begin Contact Unit -->
-            <div class="feed">
-                
-                    <div class="feed-img">
-                        <img src="img/guy1.jpg" /><!-- user avatar goes here -->
-                    </div>
-
-                    <div class="feed-text">
-                        <p><span class="name_highlight">Ricky Alvarez<!-- user name goes here --></span></p>
-                    </div>
-
-            </div>
-            <!-- End Contact Unit -->
-            
+        <h1>My Contacts</h1>
     </div>
-        
-        
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            
+
+    <div class="wrapper">
+        <h3>A</h3> <!-- letter header goes here -->
+        <!-- Begin Contact Unit -->
+        <div class="feed">
+
+            <div class="feed-img">
+                <img src="img/guy1.jpg" /><!-- user avatar goes here -->
+            </div>
+            <div class="feed-text">
+                <p><span class="name_highlight">Ricky Alvarez<!-- user name goes here --></span></p>
+            </div>
+        </div>
+        <!-- End Contact Unit -->
+
+    </div>
+
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+
             function callHome()
              {
                 window.location = "home.html";
              }
-            
-            
+
+
             app.initialize();
-            
+
             function toggle_visibility(id) {
                var e = document.getElementById(id);
                if(e.style.display == 'block')
@@ -81,8 +78,8 @@
                else
                   e.style.display = 'block';
             }
-        </script>
-            
+    </script>
+
 </body>
-        
+
 </html>

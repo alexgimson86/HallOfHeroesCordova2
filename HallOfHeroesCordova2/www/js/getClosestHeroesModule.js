@@ -46,26 +46,23 @@
     }
     var outputClosestHeroes = function (heroArray, closestHeroesArray, indexesOfClosestHeroes) {
         $('#nearbyHeroesOne').empty();
-        $('#nearbyHeroesTwo').empty();
+        $('#nearbyHallHeroesTwo').empty();
         for (var i = 0;i < closestHeroesArray.length &&  i < 6; i++) {
             var $heroesDiv;
             if (i < 3)
                 $heroesDiv = $('#nearbyHeroesOne');
             else
-                $heroesDiv = $('#nearbyHeroesTwo');
+                $heroesDiv = $('#nearbyHallHeroesTwo');
 
             $heroesDiv.append('<div class="HH-hero">\
                                     <div class="HH-people">\
                                         <img src="' + heroArray[indexesOfClosestHeroes[i]].avatarUrl + '" />\
-                                </div>\
-                                <div class="HH-name">\
-                                    <h2>\
-                                            ' + heroArray[indexesOfClosestHeroes[i]].firstName + ' ' + heroArray[indexesOfClosestHeroes[i]].lastName + ' <br>\
-                                        <span class="HH-miles"> ' + closestHeroesArray[i].toFixed(1) + ' mi ' + ' </span>\
-                                    </h2>\
                                     </div>\
-                                </div>'
-            );
+                                    <div class="HH-name">\
+                                        <h4>' + heroArray[indexesOfClosestHeroes[i]].firstName + ' ' + heroArray[indexesOfClosestHeroes[i]].lastName + '</h4>\
+                                        <h5> ' + closestHeroesArray[i].toFixed(1) + ' miles ' + ' </h5>\
+                                    </div>\
+                               </div>');
         }
         
     }

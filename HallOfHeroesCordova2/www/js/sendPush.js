@@ -1,6 +1,6 @@
 ﻿var pushModule = (function () {
     var sendPush = function (color, name) {
-        var requestObject = { "msg": "You are receiving a " + color + " call from " + name + ".", "platform": [1] };
+        var requestObject = { "msg": "You are receiving a " + color + " call from " + name, "platform": [1] };
         $.ajax({
             beforeSend: function (request) {
                 request.setRequestHeader("x-pushbots-appid", "5758e8cd4a9efa067f8b4567");
@@ -29,7 +29,7 @@
         });
     }
     var sendPushToOne = function (color, senderName, userObject) {
-        var requestObject = {  "platform": [1], "token": userObject.pushToken, "msg": color + " call from " + senderName + ".", "token": userObject.pushToken};
+        var requestObject = {  "platform": [1], "token": userObject.pushToken, "msg": color + " call from " + senderName + ".", "token": userObject.pushToken };
         $.ajax({
             beforeSend: function (request) {
                 request.setRequestHeader("x-pushbots-appid", "5758e8cd4a9efa067f8b4567");
@@ -43,10 +43,10 @@
 
             },
             success: function () {
-                //alert("push was successful");
+                //alert
             },
             error: function (response) {
-                alert("Error:" + response);
+               // alert("Error:" + response);
             }
         });
     }

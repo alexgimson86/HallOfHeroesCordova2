@@ -20,6 +20,7 @@ var app = {
     map : null,
     initCheck : sessionStorage.getItem("initializationCheck"),
     marker: null,
+    markerTwo: null,
     // Application Constructor
     initialize: function () {
         this.bindEvents();
@@ -66,19 +67,21 @@ var app = {
         });
         // Should be called once the notification is clicked
         window.plugins.PushbotsPlugin.on("notification:clicked", function (data) {
-            //alert("here is json data in init" + JSON.stringify(data));
             if (window.confirm("do you want to accept this call?")) {
-                //window.location = "green.html";
+                var name = data.message.split(" ");
+                var lastName = name[name.length - 1];
+                var firstName = name[name.length - 2];
+                lastName = lastName.substr(0, lastName.length - 1);
+                alert(firstName + ' ' + lastName);
+                sessionStorage.setItem('callerFname', firstName);
+                sessionStorage.setItem('callerLname', lastName);
                 if (data.message.indexOf("green") > -1) {
-                    alert("hit green");
-                    window.location = "green.html";
+                    window.location = "heroGreen.html";
                 }
                 else if (data.message.indexOf("yellow") > -1) {
-                    alert("hit green");
                     window.location = "yellow.html";
                 }
                 else if (data.message.indexOf("red") > -1) {
-                    alert("alert");
                     window.location = "red.html";
                 }
                 else
@@ -155,4 +158,27 @@ var app = {
     }
     // Update DOM on a Received Event
 };
+function testAjax(firstName,lastName) {
+    alert(firstName + ' ' + lastName);
+    firstName = "Samuel";
+    lastName = "Clemens";
 
+    $.ajax({
+        type: "GET",
+        url: "http://www.hallofheroesapp.com/php/setIfCallPending.php",
+        data: {
+            isPending: 0,
+            lastName: lastName,
+            firstName: firstName
+        },
+        dataType: "json",
+        success: function (data) {
+            alert("in success");
+            alert(data);
+        },
+        error: function (response) {
+            alert("in error");
+            alert(response);
+        }
+    });
+}

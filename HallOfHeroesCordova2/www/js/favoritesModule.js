@@ -27,7 +27,7 @@ var favoritesModule = (function($){
         heroArray.forEach(function (dat, i) {
             if (i === 0) {
                 $('#favoriteHeroes')
-                     .html('<div class="HH-hero"> \
+                     .html('<div class="HH-hero" data-userId="' + dat.idUsers + '" data-pushToken="' + dat.pushToken + '"> \
                                 <div class="plus-sign">\
                                     <img src="img/plus.png" alt="edit favorite hero" onClick="callContacts()" />\
                                 </div>\
@@ -41,7 +41,7 @@ var favoritesModule = (function($){
             }
             else if (i === 1) {
                 $('#favoriteHeroes')
-                     .append('<div class="HH-hero"> \
+                     .append('<div class="HH-hero" data-userId="' + dat.idUsers + '" data-pushToken="' + dat.pushToken + '"> \
                                 <div class="plus-sign">\
                                     <img src="img/plus.png" alt="edit favorite hero" onClick="callContacts()" />\
                                 </div>\
@@ -55,7 +55,7 @@ var favoritesModule = (function($){
             }
             else {
                 $('#favoriteHeroes')
-                     .append('<div class="HH-hero"> \
+                     .append('<div class="HH-hero" data-userId="' + dat.idUsers + '" data-pushToken="' + dat.pushToken + '"> \
                                 <div class="plus-sign">\
                                     <img src="img/plus.png" alt="edit favorite hero" onClick="callContacts()" />\
                                 </div>\
@@ -96,29 +96,30 @@ var favoritesModule = (function($){
               }
         });
     };
-    var makeCallToHeroes = function (color,senderName) {
-        $.ajax({
-            type: "GET",
-            url: "http://www.hallofheroesapp.com/php/favoritesTokens.php",
-            dataType: "json",
-            success: function (response) {
-                response.forEach(function (dat, i) {
-                    pushModule.sendPushToOne(color,senderName, dat);
-                });
-                makeCallPending();
-                if (color == "green")
-                    window.location = "green.html";
-                else if (color == "yellow")
-                    window.location = "yellow.html";
-                else if (color == "red")
-                    window.location = "red.html";
-                else
-                    alert("unrecognized color.");
-            },
-            error: function (response) {
-                alert("Error:" + response);
-            }
+    var makeCallToHeroes = function (color, senderName) {
+        var tokenArray = new Array();
+        jQuery('.HH-hero').each(function (i, dat) {
+            tokenArray.push(jQuery(dat).data('pushtoken'));
         });
+        var uniqueTokens = [];
+        $.each(tokenArray, function (i, token) {
+            if ($.inArray(token, uniqueTokens) === -1)
+                uniqueTokens.push(token);
+        });
+
+        makeCallPending();
+        tokenArray.forEach(function (dat) {
+            pushModule.sendPushToOne(color, senderName, dat);
+        });
+       
+        if (color == "green")
+            window.location = "green.html";
+        else if (color == "yellow")
+            window.location = "yellow.html";
+        else if (color == "red")
+            window.location = "red.html";
+        else
+            alert("unrecognized color.");
     };
     var makeCallPending = function () {
         $.ajax({

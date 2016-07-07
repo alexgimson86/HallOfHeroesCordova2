@@ -28,8 +28,8 @@
             }
         });
     }
-    var sendPushToOne = function (color, senderName, userObject) {
-        var requestObject = {  "platform": [1], "token": userObject.pushToken, "msg": color + " call from " + senderName + ".", "token": userObject.pushToken };
+    var sendPushToOne = function (color, senderName, pushToken) {
+        var requestObject = {  "platform": [1], "token": pushToken, "msg": color + " call from " + senderName + "."};
         $.ajax({
             beforeSend: function (request) {
                 request.setRequestHeader("x-pushbots-appid", "5758e8cd4a9efa067f8b4567");

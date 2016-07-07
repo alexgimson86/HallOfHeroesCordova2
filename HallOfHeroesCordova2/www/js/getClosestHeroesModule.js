@@ -21,7 +21,17 @@
         var myLongitude = sessionStorage.getItem('longitude');
         var distanceArray = [];
         heroArray.forEach(function (dat, i) {
-            distanceArray.push(getDistance(myLatitude, myLongitude, dat.latitude, dat.longitude, "M"));
+            var distanceInfo = {
+                myLatitude: myLatitude,
+                myLongitude: myLongitude,
+                heroLatitude: dat.latitude,
+                heroLongitude: dat.longitude,
+                heroId: dat.idUsers,
+                token: dat.pushToken,
+                miles: "M"
+            };
+            distanceArray.push(getDistance(distanceInfo));
+            //distanceArray.push(getDistance(myLatitude, myLongitude, dat.latitude, dat.longitude,dat.idUsers,dat.pushToken, "M"));
         });
         var closestHeroesArray = [];
         var indexesOfClosestHeroes = [];
@@ -54,7 +64,7 @@
             else
                 $heroesDiv = $('#nearbyHallHeroesTwo');
 
-            $heroesDiv.append('<div class="HH-hero">\
+            $heroesDiv.append('<div class="HH-hero" data-userId="' + heroArray[indexesOfClosestHeroes[i]].idUsers + '" data-pushToken="' + heroArray[indexesOfClosestHeroes[i]].pushToken + '">\
                                     <div class="HH-people">\
                                         <img src="' + heroArray[indexesOfClosestHeroes[i]].avatarUrl + '" />\
                                     </div>\
@@ -67,18 +77,27 @@
         
     }
     //calculate the distance of all heroes from the user
-    var getDistance = function (lat1, lon1, lat2, lon2, unit) {
-        var radlat1 = Math.PI * lat1 / 180
-        var radlat2 = Math.PI * lat2 / 180
-        var theta = lon1 - lon2
-        var radtheta = Math.PI * theta / 180
+    var getDistance = function (distanceInfo) {
+        var myLatitude = distanceInfo.myLatitude,
+            myLongitude = distanceInfo.myLongitude,
+            heroLatitude = distanceInfo.heroLatitude,
+            heroLongitude = distanceInfo.heroLongitude,
+            heroId = distanceInfo.heroId,
+            token = distanceInfo.pushToken,
+            unit = distanceInfo.miles;
+
+
+        var radlat1 = Math.PI * myLatitude / 180;
+        var radlat2 = Math.PI * heroLatitude / 180;
+        var theta = myLongitude - heroLongitude;
+        var radtheta = Math.PI * theta / 180;
         var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-        dist = Math.acos(dist)
-        dist = dist * 180 / Math.PI
-        dist = dist * 60 * 1.1515
-        if (unit == "K") { dist = dist * 1.609344 }
-        if (unit == "N") { dist = dist * 0.8684 }
-        return dist
+        dist = Math.acos(dist);
+        dist = dist * 180 / Math.PI;
+        dist = dist * 60 * 1.1515;
+        if (unit == "K") { dist = dist * 1.609344 };
+        if (unit == "N") { dist = dist * 0.8684 };
+        return dist;
     }
     return {
         getAllHeroesInfo: getAllHeroesInfo

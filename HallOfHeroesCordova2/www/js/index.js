@@ -21,6 +21,7 @@ var app = {
     initCheck : sessionStorage.getItem("initializationCheck"),
     marker: null,
     markerTwo: null,
+    saveLocationInterval : null,
     // Application Constructor
     initialize: function () {
         this.bindEvents();
@@ -30,7 +31,7 @@ var app = {
     //
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
+    bindEvents: function () {
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
     // deviceready Event Handler
@@ -39,7 +40,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function () {
         //get current location
-        window.setInterval(function () {
+       app.saveLocationInterval =  window.setInterval(function () {
             navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError);
             updateLatLongModule.callUpdateFunction();
             //alert(app.marker.position);
@@ -63,29 +64,53 @@ var app = {
             //sessionStorage.setItem("initializationCheck", 1);
         //}
         window.plugins.PushbotsPlugin.on("notification:received", function (data) {
-            alert("JSON data received in init: " + JSON.stringify(data));
+            //alert(data.message);
         });
         // Should be called once the notification is clicked
         window.plugins.PushbotsPlugin.on("notification:clicked", function (data) {
-            if (window.confirm("do you want to accept this call?")) {
-                var name = data.message.split(" ");
-                var lastName = name[name.length - 1];
-                var firstName = name[name.length - 2];
-                lastName = lastName.substr(0, lastName.length - 1);
-                alert(firstName + ' ' + lastName);
-                sessionStorage.setItem('callerFname', firstName);
-                sessionStorage.setItem('callerLname', lastName);
-                if (data.message.indexOf("green") > -1) {
-                    window.location = "heroGreen.html";
+            if (data.message.indexOf("green") > -1 || data.message.indexOf("yellow") > -1 || data.message.indexOf("red") > -1) {
+                if (window.confirm("do you want to accept this call?")) {
+                    var name = data.message.split(" ");
+                    var lastName = name[name.length - 1];
+                    var firstName = name[name.length - 2];
+                    lastName = lastName.substr(0, lastName.length - 1);
+                    alert(firstName + ' ' + lastName);
+                    //testAjax();
+                    /*$.ajax({
+                        type: "GET",
+                        url: "http://www.hallofheroesapp.com/php/checkIfCallValid.php",
+                        data: {
+                            lastName: lastName,
+                            firstName: firstName
+                        },
+                        success: function (response) {
+                            alert("in success");
+                            alert(response);
+                            getClosestHeroes(response);
+                        },
+                        error: function (response) {
+                            alert("Error:" + response);
+                        }
+                    });*/
+
+
+                    sessionStorage.setItem('callerFname', firstName);
+                    sessionStorage.setItem('callerLname', lastName);
+                    if (data.message.indexOf("green") > -1) {
+                        window.location = "heroGreen.html";
+                    }
+                    else if (data.message.indexOf("yellow") > -1) {
+                        window.location = "yellow.html";
+                    }
+                    else if (data.message.indexOf("red") > -1) {
+                        window.location = "red.html";
+                    }
+                    else
+                        alert("message just aint right");
                 }
-                else if (data.message.indexOf("yellow") > -1) {
-                    window.location = "yellow.html";
-                }
-                else if (data.message.indexOf("red") > -1) {
-                    window.location = "red.html";
-                }
-                else
-                    alert("message just aint right");
+            }
+            else {
+                alert(data.message);
             }
         });
     },
@@ -158,27 +183,34 @@ var app = {
     }
     // Update DOM on a Received Event
 };
-function testAjax(firstName,lastName) {
-    alert(firstName + ' ' + lastName);
-    firstName = "Samuel";
-    lastName = "Clemens";
-
+function testAjax(firstName, lastName) {
     $.ajax({
         type: "GET",
-        url: "http://www.hallofheroesapp.com/php/setIfCallPending.php",
+        url: "http://www.hallofheroesapp.com/php/checkIfCallValid.php",
         data: {
-            isPending: 0,
             lastName: lastName,
             firstName: firstName
         },
         dataType: "json",
-        success: function (data) {
-            alert("in success");
-            alert(data);
-        },
-        error: function (response) {
-            alert("in error");
+        success: function (response) {
+ /*           var url;
+            var isValid = 0;
             alert(response);
+            response.forEach(function (callerInfo, i) {
+                if (callerInfo.pendingCall == 1) {
+                    url = callerInfo.avatarUrl;
+                    isValid = 1;
+                }
+            });
+            if (isValid === 1) 
+                jQuery('#heroAvatar').prepend('<img src="' + url + '"  style="width: auto; height: auto;max-width: 100px;max-height: 100px"/></div>');
+            else {
+                alert("sorry but this caller has already been helped.");
+                window.location = "home.html";
+            }
+        */},
+        error: function (response) {
+            alert("Error:" + response);
         }
     });
 }

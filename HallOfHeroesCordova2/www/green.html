@@ -32,26 +32,15 @@
     <link rel="stylesheet" type="text/css" href="css/global.css" />
     <title>Hall of Heroes</title>
     <script src="js/jquery-2.2.3.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script src="js/getCallerLocation.js"></script>
-</head>
-<body>
-    <div class="header">
-        <button onClick="callHome()">
-            <img src="img/cancel.png" />
-        </button>
-        <div class="green-signal">
-            <h1>CODE GREEN</h1>
-            <h2>Signaling Hall Heroes</h2>
-        </div>
-    </div>
-    <div class="wrapper">
-        <div class="wrapper" id="geolocation" style="width: 400px; height: 600px;">
-        </div>
-    </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/updateLatLongModule.js"></script>
-        <script type="text/javascript">
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/updateLatLongModule.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            app.initialize();
             var intervalId = window.setInterval(function () {
                 $.ajax({
                     type: "GET",
@@ -60,7 +49,11 @@
                     success: function (response) {
                         if (response == 0) {
                             clearInterval(intervalId);
-                            getHeroLocation();
+                            //testing clearing the old location interval. So the map doesnt recenter automatically
+                            //clearInterval(app.saveLocationInterval);
+                            setTimeout(function () {
+                                getHeroLocation();
+                            }, 5000);
                         }
                     },
                     error: function (response) {
@@ -68,6 +61,7 @@
                     }
                 });
             }, 3000);
+        });
             function callFeed()
              {
                 window.location = "feed.html";
@@ -97,9 +91,9 @@
             {
                 window.location = "green.html";
             }
-
-            app.initialize();
-
+            function goToMessage() {
+                window.location = "messaging.html";
+            }
             function toggle_visibility(id) {
                var e = document.getElementById(id);
                if(e.style.display == 'block')
@@ -107,10 +101,26 @@
                else
                   e.style.display = 'block';
             }
-        </script>
+    </script>
+</head>
+<body>
+    <div class="header">
+        <button onClick="callHome()">
+            <img src="img/cancel.png" />
+        </button>
+        <div class="green-signal">
+            <h1>CODE GREEN</h1>
+            <h2>Signaling Hall Heroes</h2>
+            <!--<button id="sendSmsButton" onclick="goToMessage()">Send Message to hero</button>-->
+        </div>
     </div>
+    <div class="wrapper">
+        <div class="wrapper" id="geolocation" style="width: 400px; height: 600px;"></div>
+    </div>
+    
     <nav class="green-signal-nav">
         <h3 id="heroName">Please wait...</h3>
+        <button id="sendSmsButton" onclick="goToMessage()">Send Message to hero</button>
     </nav>
 </body>
 

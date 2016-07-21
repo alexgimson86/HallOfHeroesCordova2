@@ -24,6 +24,9 @@
         },
         "pushbots-cordova-plugin": {
             "PACKAGE_NAME": "io.cordova.myappc89b81"
+        },
+        "com.cordova.plugins.sms": {
+            "PACKAGE_NAME": "io.cordova.myappc89b81"
         }
     },
     "dependent_plugins": {

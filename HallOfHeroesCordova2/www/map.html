@@ -136,8 +136,9 @@
             {
                 window.location = "map.html";
             }
-
-            app.initialize();
+            $(document).ready(function () {
+                app.initialize();
+            });
 
             function toggle_visibility(id) {
                var e = document.getElementById(id);

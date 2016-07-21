@@ -1,4 +1,4 @@
-﻿var setIntervalModule = (function ($) {
+﻿/*var setIntervalModule = (function ($) {
     var setInterval = function (app) {
         window.setInterval(function () {
             //updateLatLongModule.callUpdateFunction();
@@ -8,4 +8,4 @@
     return {
         setInterval : setInterval
     }
-}(jQuery));
+}(jQuery));*/

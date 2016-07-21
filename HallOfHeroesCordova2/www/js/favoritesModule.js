@@ -69,6 +69,20 @@ var favoritesModule = (function($){
             }
        });
     };
+    var saveLocation = function (latLong) {
+        $.ajax({
+            type: "POST",
+            url: "http://www.hallofheroesapp.com/php/saveLocation.php",
+            dataType: "json",
+            data: latLong,
+            success: function (response) {
+                alert("saved location");
+            },
+            error: function (response) {
+                alert("Error:" + response);
+            }
+        });
+    }
     var distance = function(lat1, lon1, lat2, lon2, unit) {
         var radlat1 = Math.PI * lat1 / 180
         var radlat2 = Math.PI * lat2 / 180
@@ -97,6 +111,7 @@ var favoritesModule = (function($){
         });
     };
     var makeCallToHeroes = function (color, senderName) {
+
         var tokenArray = new Array();
         jQuery('.HH-hero').each(function (i, dat) {
             tokenArray.push(jQuery(dat).data('pushtoken'));
@@ -108,7 +123,7 @@ var favoritesModule = (function($){
         });
 
         makeCallPending();
-        tokenArray.forEach(function (dat) {
+        uniqueTokens.forEach(function (dat) {
             pushModule.sendPushToOne(color, senderName, dat);
         });
        

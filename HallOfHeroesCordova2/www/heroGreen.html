@@ -54,15 +54,12 @@
             $(document).ready(function () {
                 app.initialize();
                 //testAjax(sessionStorage.getItem('callerFname'),sessionStorage.getItem('callerLname'));
-               var firstName = sessionStorage.getItem('callerFname');
+                var firstName = sessionStorage.getItem('callerFname');
                 var lastName = sessionStorage.getItem('callerLname');
                 jQuery("#callerName").append(firstName + ' ' + lastName);
                 //testing clearing the location interval that is in the index.js page. I tested the same on the green.html
                 //clearInterval(app.saveLocationInterval);
-                setTimeout(function () {
-                    getCallerLocation(firstName, lastName);
-                }, 5000);
-               
+                getCallerLocation(firstName, lastName);
             });
             function callFeed()
              {

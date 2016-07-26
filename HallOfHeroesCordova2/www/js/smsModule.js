@@ -1,8 +1,10 @@
 ﻿var smsModule = (function () {
     var sendSms = function () {
         var token = sessionStorage.getItem('pushToken');
+        var callerFname = sessionStorage.getItem('firstName');
+        var callerLname = sessionStorage.getItem('lastName');
         var message = $('#messageValue').val();
-        var requestObject = { "platform": [1], "token": token, "msg": message };
+        var requestObject = { "platform": [1], "token": token, "msg": callerFname + ' ' + callerLname + ' ' + 'says ' + '"' + message + '"' };
         $.ajax({
             beforeSend: function (request) {
                 request.setRequestHeader("x-pushbots-appid", "5758e8cd4a9efa067f8b4567");

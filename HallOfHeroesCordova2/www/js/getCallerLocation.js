@@ -1,5 +1,4 @@
 ﻿function getCallerLocation(firstName, lastName) {
-    alert("entering get caller location");
     $.ajax({
         type: "GET",
         url: "http://www.hallofheroesapp.com/php/getCallerLocation.php",
@@ -9,7 +8,6 @@
         },
         dataType: "json",
         success: function (data) {
-            alert("in success of getCallerLocation " + data);
             var latitude = data[0].latitude;
             var longitude = data[0].longitude;
             var callerInfo = {
@@ -22,7 +20,6 @@
            
         },
         error: function (error) {
-            alert("in error of getcallerlocation error: " + error);
             var msg = $.parseJSON(error).msg;
             alert(msg);
 
@@ -30,8 +27,6 @@
     });
 }
 function setIfCallPending(callerInfo) {
-    
-    alert("entering setifcallpending" + callerInfo.latitude + callerInfo.longitude);
     $.ajax({
         type: "POST",
         url: "http://www.hallofheroesapp.com/php/setIfCallPending.php",
@@ -44,11 +39,11 @@ function setIfCallPending(callerInfo) {
         },
         dataType: "json",
         success: function (data) {
-            alert("in success of setifCallpending data:" + data);
-            dropMarker(callerInfo.latitude, callerInfo.longitude);
+            setTimeout(function () {
+                dropMarker(callerInfo.latitude, callerInfo.longitude);
+            }, 5000);
         },
         error: function (error) {
-            alert("in error of setifcallpending " + error);
             var msg = $.parseJSON(error).msg;
             alert(msg);
 
@@ -56,7 +51,6 @@ function setIfCallPending(callerInfo) {
     });
 }
 function getHeroLocation() {
-    alert("in hero location function");
     $.ajax({
         type: "GET",
         url: "http://www.hallofheroesapp.com/php/getHeroLatAndLong.php",
@@ -65,8 +59,12 @@ function getHeroLocation() {
             var latitude = data.latitude;
             var longitude = data.longitude;
             $('#heroName').html(data.firstName + ' ' + data.lastName + ' ' + 'is on the way!');
+            sessionStorage.setItem('heroFirstName', data.firstName);
+            sessionStorage.setItem('heroLastName', data.lastName);
             sessionStorage.setItem('pushToken', data.pushToken);
-            dropMarker(latitude, longitude);
+            setTimeout(function () {
+                dropMarker(latitude, longitude);
+            }, 5000);
         },
         error: function (error) {
             alert("in error");

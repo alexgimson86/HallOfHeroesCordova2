@@ -49,11 +49,7 @@
                     success: function (response) {
                         if (response == 0) {
                             clearInterval(intervalId);
-                            //testing clearing the old location interval. So the map doesnt recenter automatically
-                            //clearInterval(app.saveLocationInterval);
-                            setTimeout(function () {
-                                getHeroLocation();
-                            }, 5000);
+                            getHeroLocation();
                         }
                     },
                     error: function (response) {
@@ -109,9 +105,10 @@
             <img src="img/cancel.png" />
         </button>
         <div class="green-signal">
+            <button id="sendSmsButton" onclick="goToMessage()">Send Message to hero</button>
             <h1>CODE GREEN</h1>
             <h2>Signaling Hall Heroes</h2>
-            <!--<button id="sendSmsButton" onclick="goToMessage()">Send Message to hero</button>-->
+            <!--button id="sendSmsButton" onclick="goToMessage()">Send Message to hero</!--button>-->
         </div>
     </div>
     <div class="wrapper">
@@ -120,7 +117,7 @@
     
     <nav class="green-signal-nav">
         <h3 id="heroName">Please wait...</h3>
-        <button id="sendSmsButton" onclick="goToMessage()">Send Message to hero</button>
+        <!--<button id="sendSmsButton" onclick="goToMessage()">Send Message to hero</button>-->
     </nav>
 </body>
 

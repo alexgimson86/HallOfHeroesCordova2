@@ -64,7 +64,11 @@ var app = {
             //sessionStorage.setItem("initializationCheck", 1);
         //}
         window.plugins.PushbotsPlugin.on("notification:received", function (data) {
-            //alert(data.message);
+            if (data.message.indexOf("green") <= -1 && data.message.indexOf("yellow") <= -1 && data.message.indexOf("red") <= -1) {
+                if (window.confirm(data.message + "\n\n" + "Do you want to reply ?")) {
+
+                }
+            }
         });
         // Should be called once the notification is clicked
         window.plugins.PushbotsPlugin.on("notification:clicked", function (data) {
@@ -108,9 +112,6 @@ var app = {
                     else
                         alert("message just aint right");
                 }
-            }
-            else {
-                alert(data.message);
             }
         });
     },
@@ -162,19 +163,26 @@ var app = {
             });
         }
         app.marker = marker;
-        if (app.marker) {
-            var watchID = navigator.geolocation.watchPosition(function (position) {
-                app.marker.setPosition(
-                    new google.maps.LatLng(
-                        position.coords.latitude,
-                        position.coords.longitude)
-                );
-                var latlng = new google.maps.LatLng(
-                        position.coords.latitude,
-                        position.coords.longitude);
-                app.map.setCenter(latlng);
-                //app.map.panTo(app.marker.getPosition());
-            });
+        if (app.markerTwo === null) {
+            if (app.marker) {
+                var watchID = navigator.geolocation.watchPosition(function (position) {
+                    app.marker.setPosition(
+                        new google.maps.LatLng(
+                            position.coords.latitude,
+                            position.coords.longitude)
+                    );
+                    var latlng = new google.maps.LatLng(
+                            position.coords.latitude,
+                            position.coords.longitude);
+                    if (app.markerTwo === null) {
+                        app.map.setCenter(latlng);
+                    }
+                    else {
+                        navigator.geolocation.clearWatch(watchID);
+                    }
+                    //app.map.panTo(app.marker.getPosition());
+                });
+            }
         }
     },
 

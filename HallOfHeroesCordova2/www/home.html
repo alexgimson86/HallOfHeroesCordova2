@@ -157,9 +157,13 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
-			function init() {
+            function init()
+            {
                 favoritesModule.getFavoriteHeroes();
                 userModule.getUserInfo();
+                sessionStorage.setItem('isHero', 0);
+                sessionStorage.setItem('isCaller', 0);
+                sessionStorage.setItem('hasLoaded', 0);
             }
             function callFeed()
              {
@@ -195,19 +199,22 @@
                     latitude: latitude,
                     longitude: longitude
                 };
-               // favoritesModule.saveLocation(latLong);
-                favoritesModule.makeCallToHeroes("green", userName,latLong);
+                // favoritesModule.saveLocation(latLong);
+                sessionStorage.setItem('color', 'green');
+                favoritesModule.makeCallToHeroes("green", userName, latLong);
                 //favoritesModule.makeCallToHeroes("green", userName);
             }
              function callYellow()
             {
-                var userName = sessionStorage.getItem('firstName') + ' ' + sessionStorage.getItem('lastName');
-                favoritesModule.makeCallToHeroes("yellow", userName);
+                 var userName = sessionStorage.getItem('firstName') + ' ' + sessionStorage.getItem('lastName');
+                 sessionStorage.setItem('color', 'yellow');
+                 favoritesModule.makeCallToHeroes("yellow", userName);
                 //favoritesModule.makeCallToHeroes("yellow", userName);
             }
 			function callRed()
             {
-                var userName = sessionStorage.getItem('firstName') + ' ' + sessionStorage.getItem('lastName');
+			    var userName = sessionStorage.getItem('firstName') + ' ' + sessionStorage.getItem('lastName');
+			    sessionStorage.setItem('color', 'red');
                 favoritesModule.makeCallToHeroes("red", userName);
                 //favoritesModule.makeCallToHeroes("red", userName);
             }

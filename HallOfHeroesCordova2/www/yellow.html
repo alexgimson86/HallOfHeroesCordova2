@@ -32,27 +32,33 @@
     <script src="js/jquery-2.2.3.min.js"></script>
     <script async defer
             src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD-vBeqieztqoeRYaEXeIgjkTIMgq38ukQ"></script>
-</head>
-<body>
-    <div class="header green-header">
-        <button class="cancel" onClick="callHome()">
-            <img src="img/cancel.png" />
-        </button>
-        <div class="green-signal">
-            <h1>CODE YELLOW</h1>
-
-            <h2>Signaling Hall Heroes</h2>
-
-        </div>
-    </div>
-    <div class="wrapper" id="profile-wrapper">
-        <div class="green-map" id="geolocation" style="width: 640px; height:400px;">
-        </div>
-
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/updateLatLongModule.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
+    <script src="js/getCallerLocation.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/updateLatLongModule.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/favoritesModule.js"></script>
+    <script type="text/javascript" src="js/sendPush.js"></script>
+    <script type="text/javascript">
+            $(document).ready(function () {
+                app.initialize();
+                sessionStorage.setItem('isCaller', 1);
+                var intervalId = window.setInterval(function () {
+                    $.ajax({
+                        type: "GET",
+                        url: "http://www.hallofheroesapp.com/php/checkIfCallPending.php",
+                        dataType: "json",
+                        success: function (response) {
+                            if (response == 0) {
+                                clearInterval(intervalId);
+                                getHeroLocation();
+                            }
+                        },
+                        error: function (response) {
+                            //   alert("Error:" + response);
+                        }
+                    });
+                }, 3000);
+            });
             function callFeed()
              {
                 window.location = "feed.html";
@@ -82,7 +88,10 @@
             {
                 window.location = "green.html";
             }
-
+            function goToMessage()
+            {
+                window.location = "messaging.html";
+            }
             app.initialize();
 
             function toggle_visibility(id) {
@@ -92,10 +101,29 @@
                else
                   e.style.display = 'block';
             }
-        </script>
+    </script>
+</head>
+<body>
+    <div class="header green-header">
+        <button class="cancel" onClick="callHome()">
+            <img src="img/cancel.png" />
+        </button>
+        <div class="green-signal">
+            <button id="sendSmsButton" onclick="goToMessage()">Send Message to hero</button>
+            <h1>CODE YELLOW</h1>
+
+            <h2>Signaling Hall Heroes</h2>
+
+        </div>
+    </div>
+    <div class="wrapper" id="profile-wrapper">
+        <div class="green-map" id="geolocation" style="width: 640px; height:400px;">
+        </div>
+
+       
     </div>
     <nav class="green-signal-nav">
-        <h3>Please wait...</h3>
+        <h3 id="heroName">Please wait...</h3>
     </nav>
 </body>
 

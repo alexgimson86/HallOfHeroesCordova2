@@ -38,9 +38,10 @@
             <img src="img/cancel.png" />
         </button>
         <div class="green-signal" id="heroAvatar">
+            <button id="sendSmsButton" onclick="goToMessage()">Send Message to caller</button>
             <h1>CODE GREEN</h1>
+            <h2 id="callerName">picking up </h2>
         </div>
-        <h2 id="callerName">picking up </h2>
     </div>
     <div class="wrapper">
         <div id="geolocation" style="width: 400px; height:600px;"></div>
@@ -52,6 +53,7 @@
         <script src="js/getCallerLocation.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
+                sessionStorage.setItem('isHero', 1);
                 app.initialize();
                 //testAjax(sessionStorage.getItem('callerFname'),sessionStorage.getItem('callerLname'));
                 var firstName = sessionStorage.getItem('callerFname');
@@ -60,6 +62,7 @@
                 //testing clearing the location interval that is in the index.js page. I tested the same on the green.html
                 //clearInterval(app.saveLocationInterval);
                 getCallerLocation(firstName, lastName);
+                sessionStorage.setItem('hasLoaded',1);
             });
             function callFeed()
              {
@@ -90,6 +93,10 @@
             {
                 window.location = "green.html";
             }
+            function goToMessage()
+            {
+                window.location = "messageFromHero.html";
+            }
             function toggle_visibility(id) {
                var e = document.getElementById(id);
                if(e.style.display == 'block')
@@ -100,6 +107,7 @@
         </script>
     <div id="heroAvatar">
     <nav class="green-signal-nav">
+
         <h3></h3>
     </nav>
     </div>

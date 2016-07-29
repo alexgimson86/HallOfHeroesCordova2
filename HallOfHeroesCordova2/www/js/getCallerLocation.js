@@ -1,30 +1,45 @@
 ﻿function getCallerLocation(firstName, lastName) {
-    $.ajax({
-        type: "GET",
-        url: "http://www.hallofheroesapp.com/php/getCallerLocation.php",
-        data: {
-            lastName: lastName,
-            firstName: firstName
-        },
-        dataType: "json",
-        success: function (data) {
-            var latitude = data[0].latitude;
-            var longitude = data[0].longitude;
-            var callerInfo = {
-                latitude: latitude,
-                longitude: longitude,
-                firstName: firstName,
-                lastName : lastName
-            }
-            setIfCallPending(callerInfo);
-           
-        },
-        error: function (error) {
-            var msg = $.parseJSON(error).msg;
-            alert(msg);
+    var hasLoaded = sessionStorage.getItem('hasLoaded');
+    if (hasLoaded == 0) {
+        $.ajax({
+            type: "GET",
+            url: "http://www.hallofheroesapp.com/php/getCallerLocation.php",
+            data: {
+                lastName: lastName,
+                firstName: firstName
+            },
+            dataType: "json",
+            success: function (data) {
+                var latitude = data[0].latitude;
+                var longitude = data[0].longitude;
+                sessionStorage.setItem('callerLat', latitude);
+                sessionStorage.setItem('callerLong', longitude);
+                var callersPushToken = data[0].pushToken;
+                sessionStorage.setItem('callersPushToken', callersPushToken);
+                var callerInfo = {
+                    latitude: latitude,
+                    longitude: longitude,
+                    firstName: firstName,
+                    lastName: lastName
+                }
+                setIfCallPending(callerInfo);
 
-        }
-    });
+            },
+            error: function (error) {
+                var msg = $.parseJSON(error).msg;
+                alert(msg);
+
+            }
+        });
+    }
+    else {
+        var lat = sessionStorage.getItem('callerLat');
+        var long = sessionStorage.getItem('callerLong');
+        alert(lat, long);
+        setTimeout(function () {
+            dropMarker(lat, long);
+        }, 5000);
+    }
 }
 function setIfCallPending(callerInfo) {
     $.ajax({

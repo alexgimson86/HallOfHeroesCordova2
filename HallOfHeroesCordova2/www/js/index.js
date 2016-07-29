@@ -66,7 +66,12 @@ var app = {
         window.plugins.PushbotsPlugin.on("notification:received", function (data) {
             if (data.message.indexOf("green") <= -1 && data.message.indexOf("yellow") <= -1 && data.message.indexOf("red") <= -1) {
                 if (window.confirm(data.message + "\n\n" + "Do you want to reply ?")) {
-
+                    var isHero = sessionStorage.getItem('isHero');
+                    var isCaller = sessionStorage.getItem('isCaller');
+                    if (isHero == 1)
+                        window.location = 'messageFromHero.html';
+                    else
+                        window.location = 'messaging.html';
                 }
             }
         });
@@ -79,28 +84,20 @@ var app = {
                     var firstName = name[name.length - 2];
                     lastName = lastName.substr(0, lastName.length - 1);
                     alert(firstName + ' ' + lastName);
-                    //testAjax();
-                    /*$.ajax({
-                        type: "GET",
-                        url: "http://www.hallofheroesapp.com/php/checkIfCallValid.php",
-                        data: {
-                            lastName: lastName,
-                            firstName: firstName
-                        },
-                        success: function (response) {
-                            alert("in success");
-                            alert(response);
-                            getClosestHeroes(response);
-                        },
-                        error: function (response) {
-                            alert("Error:" + response);
-                        }
-                    });*/
 
-
+                    if (data.message.indexOf("green") > -1) {
+                        sessionStorage.setItem('color', 'green');
+                    }
+                    if (data.message.indexOf("yellow") > -1) {
+                        sessionStorage.setItem('color', 'yellow');
+                    }
+                    if (data.message.indexOf("red") > -1) {
+                        sessionStorage.setItem('color', 'red');
+                    }
                     sessionStorage.setItem('callerFname', firstName);
                     sessionStorage.setItem('callerLname', lastName);
-                    if (data.message.indexOf("green") > -1) {
+                    window.location = "heroGreen.html";
+                   /* if (data.message.indexOf("green") > -1) {
                         window.location = "heroGreen.html";
                     }
                     else if (data.message.indexOf("yellow") > -1) {
@@ -110,7 +107,7 @@ var app = {
                         window.location = "red.html";
                     }
                     else
-                        alert("message just aint right");
+                        alert("message just aint right");*/
                 }
             }
         });

@@ -38,9 +38,12 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/updateLatLongModule.js"></script>
+    <script type="text/javascript"  src="js/favoritesModule.js"></script>
+    <script type="text/javascript" src="js/sendPush.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             app.initialize();
+            sessionStorage.setItem('isCaller', 1);
             var intervalId = window.setInterval(function () {
                 $.ajax({
                     type: "GET",

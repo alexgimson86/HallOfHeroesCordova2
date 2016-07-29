@@ -123,18 +123,34 @@ var favoritesModule = (function($){
         });
 
         makeCallPending();
-        uniqueTokens.forEach(function (dat) {
-            pushModule.sendPushToOne(color, senderName, dat);
-        });
+        pushModule.sendPushToOne(color, senderName, uniqueTokens[0]);
+        setTimeout(function () {
+            pushModule.sendPushToOne(color, senderName, uniqueTokens[1]);
+        }, 500);
+        setTimeout(function () {
+            pushModule.sendPushToOne(color, senderName, uniqueTokens[2]);
+            if (color == "green")
+                window.location = "green.html";
+            else if (color == "yellow")
+                window.location = "yellow.html";
+            else if (color == "red")
+                window.location = "red.html";
+            else
+                alert("unrecognized color.");
+        }, 1000);
+        //pushModule.sendPushToAll(color,senderName);
+      /* uniqueTokens.forEach(function (dat,i) {
+           pushModule.sendPushToOne(color, senderName,uniqueTokens,pushModule.sendPushToOne);
+        });*/
        
-        if (color == "green")
+       /* if (color == "green")
             window.location = "green.html";
         else if (color == "yellow")
             window.location = "yellow.html";
         else if (color == "red")
             window.location = "red.html";
         else
-            alert("unrecognized color.");
+            alert("unrecognized color.");*/
     };
     var makeCallPending = function () {
         $.ajax({

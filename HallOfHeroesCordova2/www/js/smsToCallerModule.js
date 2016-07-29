@@ -1,10 +1,10 @@
-﻿var smsModule = (function () {
-    var sendSms = function () {
-        var token = sessionStorage.getItem('pushToken');
-        var callerFname = sessionStorage.getItem('firstName');
-        var callerLname = sessionStorage.getItem('lastName');
+﻿var smsToCallerModule = (function () {
+    var sendSmsToCaller = function () {
+        var token = sessionStorage.getItem('callersPushToken');
+        var heroFname = sessionStorage.getItem('firstName');
+        var heroLname = sessionStorage.getItem('lastName');
         var message = $('#messageValue').val();
-        var requestObject = { "platform": [1], "token": token, "msg": callerFname + ' ' + callerLname + ' ' + 'says ' + '"' + message + '"' };
+        var requestObject = { "platform": [1], "token": token, "msg": heroFname + ' ' + heroLname + ' ' + 'says ' + '"' + message + '"' };
         $.ajax({
             beforeSend: function (request) {
                 request.setRequestHeader("x-pushbots-appid", "5758e8cd4a9efa067f8b4567");
@@ -15,15 +15,10 @@
             url: "https://api.pushbots.com/push/one",
             data: JSON.stringify(requestObject),
             complete: function () {
-
+                window.location = "heroGreen.html";
             },
             success: function () {
-                if (sessionStorage.getItem('color') == 'green')
-                    window.location = "green.html";
-                else if (sessionStorage.getItem('color') == 'yellow')
-                    window.location = 'yellow.html';
-                else
-                    window.location = 'red.html';
+                //window.location = "heroGreen.html";
             },
             error: function (response) {
                 // alert("Error:" + response);
@@ -36,12 +31,12 @@
             modal: true,
             buttons: {
                 "Send": function () {
-                    sendSms();
+                    sendSmsToCaller();
                     $(this).dialog("close");
                 },
                 "Cancel": function () {
                     $(this).dialog("close");
-                    window.location = "green.html";
+                    window.location = "heroGreen.html";
                 }
             }
         });
@@ -49,11 +44,11 @@
 
 
     return {
-        sendSms: sendSms,
+        sendSmsToCaller: sendSmsToCaller,
         openDialog: openDialog
     };
 
 }());
 $(document).ready(function () {
-    smsModule.openDialog();
+    smsToCallerModule.openDialog();
 });

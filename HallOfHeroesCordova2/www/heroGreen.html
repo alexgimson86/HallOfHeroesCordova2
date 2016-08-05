@@ -39,13 +39,13 @@
         </button>
         <div class="green-signal" id="heroAvatar">
             <button id="sendSmsButton" onclick="goToMessage()">Send Message to caller</button>
-            <h1>CODE GREEN</h1>
-            <h2 id="callerName">picking up </h2>
+            <!--<h1>CODE GREEN</h1>-->
+            <!---<h2 id="callerName">picking up </h2>-->
         </div>
     </div>
-    <div class="wrapper">
+    <!--<div class="wrapper">-->
         <div id="geolocation" style="width: 400px; height:600px;"></div>
-    </div>
+    <!--</div>-->
 
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
@@ -54,14 +54,16 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 sessionStorage.setItem('isHero', 1);
-                app.initialize();
+                //app.initialize();
                 //testAjax(sessionStorage.getItem('callerFname'),sessionStorage.getItem('callerLname'));
                 var firstName = sessionStorage.getItem('callerFname');
                 var lastName = sessionStorage.getItem('callerLname');
-                jQuery("#callerName").append(firstName + ' ' + lastName);
+                //jQuery("#callerName").append(firstName + ' ' + lastName);
                 //testing clearing the location interval that is in the index.js page. I tested the same on the green.html
                 //clearInterval(app.saveLocationInterval);
+                navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError);
                 getCallerLocation(firstName, lastName);
+                app.initialize();
                 sessionStorage.setItem('hasLoaded',1);
             });
             function callFeed()
@@ -107,8 +109,7 @@
         </script>
     <div id="heroAvatar">
     <nav class="green-signal-nav">
-
-        <h3></h3>
+        <h3 id="callerName"></h3>
     </nav>
     </div>
 

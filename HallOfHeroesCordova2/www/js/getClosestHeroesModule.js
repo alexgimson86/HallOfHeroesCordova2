@@ -11,7 +11,7 @@
                 getClosestHeroes(response);
             },
             error: function (response) {
-                alert("Error:" + response);
+              //  alert("Error:" + response);
             }
         });
     };

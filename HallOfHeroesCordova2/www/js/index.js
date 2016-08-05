@@ -21,7 +21,8 @@ var app = {
     initCheck : sessionStorage.getItem("initializationCheck"),
     marker: null,
     markerTwo: null,
-    saveLocationInterval : null,
+    saveLocationInterval: null,
+    saveLocationIntervalHero: null,
     // Application Constructor
     initialize: function () {
         this.bindEvents();
@@ -39,12 +40,26 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function () {
-        //get current location
-       app.saveLocationInterval =  window.setInterval(function () {
-            navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError);
-            updateLatLongModule.callUpdateFunction();
-            //alert(app.marker.position);
-        }, 10000);
+        //get current location if you arent hero 
+        //will get location less frequently to save battery
+        if (sessionStorage.getItem('isHero') == 0) {
+            app.saveLocationInterval = window.setInterval(function () {
+                //call every few seconds to update the users location
+                navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError);
+            }, 10000);
+        }
+
+        //if you are hero we get location more frequently and update more frequently
+        //to give a better more accurate marker
+        else {
+            //clearInterval(app.saveLocationInterval);
+            app.saveLocationIntervalHero = window.setInterval(function () {
+                //call every few seconds to update the users location
+
+                recursiveGetCoordinates({latitude: 0, longitude: 0,count:10});
+                //navigator.geolocation.getCurrentPosition(app.onSuccess, ap p.onError);
+            }, 5000);
+        }
         navigator.geolocation.getCurrentPosition(app.onInitialSuccess, app.onError);
 
         //if (app.initCheck === "0") {
@@ -64,7 +79,7 @@ var app = {
             //sessionStorage.setItem("initializationCheck", 1);
         //}
         window.plugins.PushbotsPlugin.on("notification:received", function (data) {
-            if (data.message.indexOf("green") <= -1 && data.message.indexOf("yellow") <= -1 && data.message.indexOf("red") <= -1) {
+            if (data.message.indexOf("green call from") <= -1 && data.message.indexOf("yellow call from") <= -1 && data.message.indexOf("red call from") <= -1) {
                 if (window.confirm(data.message + "\n\n" + "Do you want to reply ?")) {
                     var isHero = sessionStorage.getItem('isHero');
                     var isCaller = sessionStorage.getItem('isCaller');
@@ -77,13 +92,12 @@ var app = {
         });
         // Should be called once the notification is clicked
         window.plugins.PushbotsPlugin.on("notification:clicked", function (data) {
-            if (data.message.indexOf("green") > -1 || data.message.indexOf("yellow") > -1 || data.message.indexOf("red") > -1) {
+            if (data.message.indexOf("green call from") > -1 || data.message.indexOf("yellow call from") > -1 || data.message.indexOf("red call from") > -1) {
                 if (window.confirm("do you want to accept this call?")) {
                     var name = data.message.split(" ");
                     var lastName = name[name.length - 1];
                     var firstName = name[name.length - 2];
                     lastName = lastName.substr(0, lastName.length - 1);
-                    alert(firstName + ' ' + lastName);
 
                     if (data.message.indexOf("green") > -1) {
                         sessionStorage.setItem('color', 'green');
@@ -97,57 +111,36 @@ var app = {
                     sessionStorage.setItem('callerFname', firstName);
                     sessionStorage.setItem('callerLname', lastName);
                     window.location = "heroGreen.html";
-                   /* if (data.message.indexOf("green") > -1) {
-                        window.location = "heroGreen.html";
-                    }
-                    else if (data.message.indexOf("yellow") > -1) {
-                        window.location = "yellow.html";
-                    }
-                    else if (data.message.indexOf("red") > -1) {
-                        window.location = "red.html";
-                    }
-                    else
-                        alert("message just aint right");*/
                 }
             }
         });
     },
-    onSuccess: function(position){
+    onSuccess: function (position) {
         var longitude = position.coords.longitude;
         var latitude = position.coords.latitude;
-        var latLong = new google.maps.LatLng(latitude, longitude);
         sessionStorage.setItem("latitude", latitude);
         sessionStorage.setItem("longitude", longitude);
-
-        /*var mapOptions = {
-            center: latLong,
-            zoom: 16,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };*/
-        //var map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
-        /*if (app.marker) {
+        updateLatLongModule.callUpdateFunction();
+        if (app.marker) {
+            var latLong = new google.maps.LatLng(latitude, longitude);
             app.marker.setPosition(latLong);
-            app.map.setCenter(latLong);
-        }*/
-        /*if (app.marker) {
-            app.marker.setCenter(latLong);
-        }*/
-        //alert("latitude: " + latitude + "longitude: " + longitude);
+        }
     },
     onInitialSuccess: function(position){
         var longitude = position.coords.longitude;
         var latitude = position.coords.latitude;
-        var latLong = new google.maps.LatLng(latitude, longitude);
+        if (google) {
+            var latLong = new google.maps.LatLng(latitude, longitude);
+        }
         sessionStorage.setItem("latitude", latitude);
         sessionStorage.setItem("longitude", longitude);
-        //alert("latitude: " + latitude + "longitude: " + longitude);
             
         var mapOptions = {
             center: latLong,
             zoom: 16,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        if (google) {
+        if (sessionStorage.getItem('isMap')==1 || sessionStorage.getItem('isHero')==1 || sessionStorage.getItem('isCaller')==1) {
             app.map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
         }
         //app.map.setCenter(latLong);
@@ -157,34 +150,47 @@ var app = {
                 position: latLong,
                 map: app.map,
                 title: 'your location'
-            });
-        }
-        app.marker = marker;
-        if (app.markerTwo === null) {
-            if (app.marker) {
-                var watchID = navigator.geolocation.watchPosition(function (position) {
-                    app.marker.setPosition(
-                        new google.maps.LatLng(
-                            position.coords.latitude,
-                            position.coords.longitude)
-                    );
-                    var latlng = new google.maps.LatLng(
-                            position.coords.latitude,
-                            position.coords.longitude);
-                    if (app.markerTwo === null) {
-                        app.map.setCenter(latlng);
-                    }
-                    else {
-                        navigator.geolocation.clearWatch(watchID);
-                    }
-                    //app.map.panTo(app.marker.getPosition());
                 });
-            }
+                app.marker = marker;
         }
+       // app.marker = marker;
+        
+        /*if (app.marker) {
+            var watchID = navigator.geolocation.watchPosition(function (position) {
+                app.marker.setPosition(
+                    new google.maps.LatLng(
+                        position.coords.latitude,
+                        position.coords.longitude)
+                );
+                var latlng = new google.maps.LatLng(
+                        position.coords.latitude,
+                        position.coords.longitude);
+                if (app.markerTwo === null) {
+                    app.map.setCenter(latlng);
+                }
+                else {
+                    //navigator.geolocation.clearWatch(watchID);
+                }
+                //app.map.panTo(app.marker.getPosition());
+            });
+        }*/
+        //testing event
+       if (sessionStorage.getItem('isCaller') == 1) {
+            var listener = google.maps.event.addListenerOnce(app.map, 'tilesloaded', function (evt) {
+                dropMarker(sessionStorage.getItem('heroLat'), sessionStorage.getItem('heroLong'));
+                sessionStorage.setItem('callerListener', listener);
+            });
+       }
+       if (sessionStorage.getItem('isHero') == 1) {
+           var listener = google.maps.event.addListenerOnce(app.map, 'tilesloaded', function (evt) {
+               dropMarker(sessionStorage.getItem('callerLat'), sessionStorage.getItem('callerLong'));
+               sessionStorage.setItem('heroListener', listener);
+           });
+       }
     },
 
     onError: function (error) {
-        alert('code: ' + error.code + '\n' + 'message: ' + error.message);
+        //alert('code: ' + error.code + '\n' + 'message: ' + error.message);
     }
     // Update DOM on a Received Event
 };
@@ -215,7 +221,36 @@ function testAjax(firstName, lastName) {
             }
         */},
         error: function (response) {
-            alert("Error:" + response);
+          //  alert("Error:" + response);
         }
     });
+}
+//function is on an interval, is set when you are the hero.
+//get an average of lat and long for the heroes coordinates to be
+//more accurate 
+function recursiveGetCoordinates(coordinatesAccumulator) {
+
+    if (coordinatesAccumulator.count != 0) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            /* if they are the hero get latitude and longitude 10
+            times and then take the average. To make it more accurate and 
+            prevent the marker from jumping around so much */
+            coordinatesAccumulator.latitude += position.coords.latitude;
+            coordinatesAccumulator.longitude += position.coords.longitude;
+            recursiveGetCoordinates({ latitude: coordinatesAccumulator.latitude, longitude: coordinatesAccumulator.longitude, count: --coordinatesAccumulator.count });
+        }, app.onError);
+    }
+    else {
+        coordinatesAccumulator.latitude = coordinatesAccumulator.latitude / 10;
+        coordinatesAccumulator.longitude = coordinatesAccumulator.longitude / 10;
+        sessionStorage.setItem("latitude", coordinatesAccumulator.latitude);
+        sessionStorage.setItem("longitude", coordinatesAccumulator.longitude);
+
+        updateLatLongModule.callUpdateFunction();
+        if (app.marker) {
+            var latLong = new google.maps.LatLng(coordinatesAccumulator.latitude, coordinatesAccumulator.longitude);
+            app.marker.setPosition(latLong);
+        }
+        return;
+    }
 }

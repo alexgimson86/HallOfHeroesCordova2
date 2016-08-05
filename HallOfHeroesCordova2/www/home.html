@@ -164,6 +164,8 @@
                 sessionStorage.setItem('isHero', 0);
                 sessionStorage.setItem('isCaller', 0);
                 sessionStorage.setItem('hasLoaded', 0);
+                sessionStorage.setItem('isMap', 0);
+                sessionStorage.setItem('isLoadedCaller', 0);
             }
             function callFeed()
              {
@@ -192,6 +194,7 @@
 
             function callGreen()
             {
+                //navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError);
                 var userName = sessionStorage.getItem('firstName') + ' ' + sessionStorage.getItem('lastName');
                 var latitude = sessionStorage.getItem('latitude');
                 var longitude = sessionStorage.getItem('longitude');
@@ -228,6 +231,7 @@
                 window.location = "map.html";
                // window.location = "heroGreen.html";
             }
+            init();
             app.initialize();
             getClosestHeroesModule.getAllHeroesInfo();
 
@@ -238,7 +242,6 @@
                else
                   e.style.display = 'block';
             }
-			init();
 			window.setInterval(function () {
                 favoritesModule.getFavoriteHeroes();
                 getClosestHeroesModule.getAllHeroesInfo();

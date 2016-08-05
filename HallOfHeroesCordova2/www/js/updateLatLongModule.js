@@ -21,10 +21,10 @@
                 longitude: longitude
             },
             success: function (response) {
-               // alert("updated location with latitude " + latitude + " and longitude " + longitude + ".");
+             // alert("updated location with latitude " + latitude + " and longitude " + longitude + ".");
             },
             error: function (response) {
-             //   alert("Error:" + response);
+              alert("Error updating location");
             }
         });
     }

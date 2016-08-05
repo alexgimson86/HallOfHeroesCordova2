@@ -105,6 +105,15 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
+            function init()
+            {
+                sessionStorage.setItem('isHero', 0);
+                sessionStorage.setItem('isCaller', 0);
+                sessionStorage.setItem('hasLoaded', 0);
+                sessionStorage.setItem('isMap', 0);
+                sessionStorage.setItem('isLoadedCaller', 0);
+
+            }
             function callFeed()
              {
                 window.location = "feed.html";
@@ -144,7 +153,7 @@
             {
                 window.location = "map.html";
             }
-
+            init();
             app.initialize();
 
             function toggle_visibility(id) {

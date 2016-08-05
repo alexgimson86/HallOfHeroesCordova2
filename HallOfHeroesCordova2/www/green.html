@@ -34,6 +34,7 @@
     <script src="js/jquery-2.2.3.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/distanceFromFavoriteHeroes.js"></script>
     <script src="js/getCallerLocation.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
@@ -41,82 +42,144 @@
     <script type="text/javascript"  src="js/favoritesModule.js"></script>
     <script type="text/javascript" src="js/sendPush.js"></script>
     <script type="text/javascript">
+        function initLocation() {
+            navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError);
+        }
+        initLocation();
         $(document).ready(function () {
-            app.initialize();
+            //moved initialize to test stuff
+            //app.initialize();
             sessionStorage.setItem('isCaller', 1);
-            var intervalId = window.setInterval(function () {
-                $.ajax({
-                    type: "GET",
-                    url: "http://www.hallofheroesapp.com/php/checkIfCallPending.php",
-                    dataType: "json",
-                    success: function (response) {
-                        if (response == 0) {
-                            clearInterval(intervalId);
-                            getHeroLocation();
+            if (sessionStorage.getItem('isLoadedCaller') == 0) {
+                var intervalId = window.setInterval(function () {
+                    $.ajax({
+                        type: "GET",
+                        url: "http://www.hallofheroesapp.com/php/checkIfCallPending.php",
+                        dataType: "json",
+                        success: function (response) {
+                            if (response == 0) {
+                                hideLoader();
+                                //app.initialize();
+                                clearInterval(intervalId);
+                                getHeroLocation();
+                                app.initialize();
+                                jQuery("#heroName").html('Your hero is on the way!');
+                                //added for testing
+                                //app.initialize();
+                                // updateMarker();
+                            }
+                        },
+                        error: function (response) {
+                            //   alert("Error:" + response);
                         }
-                    },
-                    error: function (response) {
-                        //   alert("Error:" + response);
-                    }
-                });
-            }, 3000);
+                    });
+                }, 5000);
+                sessionStorage.setItem('isLoadedCaller', 1);
+            }
+            else {
+                hideLoader();
+                jQuery('#heroName').html('your hero is on the way!');
+                getHeroLocation();
+                app.initialize();
+            }
+            
         });
-            function callFeed()
-             {
-                window.location = "feed.html";
-             }
-
-            function callHome()
-             {
-                window.location = "home.html";
-             }
-
-            function callStore()
-             {
-                window.location = "store.html";
-             }
-
-            function callSignal()
-             {
-                window.location = "signal.html";
-             }
-
-            function callRedeem()
+        function hideLoader()
+        {
+            document.getElementById("loader").style.display = "none";
+        }
+        function callFeed()
             {
-                window.location = "redeem.html";
+            window.location = "feed.html";
             }
 
-            function callGreen()
+        function callHome()
             {
-                window.location = "green.html";
+            window.location = "home.html";
             }
-            function goToMessage() {
-                window.location = "messaging.html";
+
+        function callStore()
+            {
+            window.location = "store.html";
             }
-            function toggle_visibility(id) {
-               var e = document.getElementById(id);
-               if(e.style.display == 'block')
-                  e.style.display = 'none';
-               else
-                  e.style.display = 'block';
+
+        function callSignal()
+            {
+            window.location = "signal.html";
             }
+
+        function callRedeem()
+        {
+            window.location = "redeem.html";
+        }
+
+        function callGreen()
+        {
+            window.location = "green.html";
+        }
+        function goToMessage() {
+            window.location = "messaging.html";
+        }
+        function toggle_visibility(id) {
+            var e = document.getElementById(id);
+            if(e.style.display == 'block')
+                e.style.display = 'none';
+            else
+                e.style.display = 'block';
+        }
     </script>
+    <style>
+        .loader {
+            margin: auto;
+            left: 50%;
+            top: 50%;
+            z-index: 1;
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 80px;
+            height: 80px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="header">
         <button onClick="callHome()">
             <img src="img/cancel.png" />
         </button>
-        <div class="green-signal">
-            <button id="sendSmsButton" onclick="goToMessage()">Send Message to hero</button>
-            <h1>CODE GREEN</h1>
-            <h2>Signaling Hall Heroes</h2>
+        <!--<div class="green-signal">-->
+        <button id="sendSmsButton" onclick="goToMessage()">Send Message to hero</button>
+            <!--<h1>CODE GREEN</h1>-->
+        <h2 id="signalHeroes">Signaling Hall Heroes</h2>
+        <div class="loader" id="loader"></div>
             <!--button id="sendSmsButton" onclick="goToMessage()">Send Message to hero</!--button>-->
-        </div>
+        <!---</div>-->
     </div>
-    <div class="wrapper">
-        <div class="wrapper" id="geolocation" style="width: 400px; height: 600px;"></div>
-    </div>
+    <!--<div class="wrapper">-->
+        <div id="geolocation" style="width: 400px; height: 600px;"></div>
+    <!--</div>-->
     
     <nav class="green-signal-nav">
         <h3 id="heroName">Please wait...</h3>

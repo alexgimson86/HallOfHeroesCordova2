@@ -97,6 +97,14 @@
     <script type="text/javascript" src="cordova.js"></script>
     <!-- <script type="text/javascript" src="js/index.js"></script>-->
     <script type="text/javascript">
+            function init()
+            {
+                sessionStorage.setItem('isMap', 1);
+                sessionStorage.setItem('isHero', 0);
+                sessionStorage.setItem('isCaller', 0);
+                sessionStorage.setItem('hasLoaded', 0);
+                sessionStorage.setItem('isLoadedCaller', 0);
+            }
             function callFeed()
              {
                 window.location = "feed.html";
@@ -137,6 +145,7 @@
                 window.location = "map.html";
             }
             $(document).ready(function () {
+                init();
                 app.initialize();
             });
 

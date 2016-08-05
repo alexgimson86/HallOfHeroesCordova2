@@ -79,7 +79,7 @@ var favoritesModule = (function($){
                 alert("saved location");
             },
             error: function (response) {
-                alert("Error:" + response);
+               // alert("Error:" + response);
             }
         });
     }
@@ -106,7 +106,7 @@ var favoritesModule = (function($){
                   createFavoriteHeroes(response);
               },
               error: function(response){
-                alert("Error:" + response);
+                //alert("Error:" + response);
               }
         });
     };

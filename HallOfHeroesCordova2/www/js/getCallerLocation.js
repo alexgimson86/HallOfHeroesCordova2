@@ -77,6 +77,15 @@ function getHeroLocation() {
 function dropMarker(latitude,longitude)
 {
     var callersMarker;
+
+    if (sessionStorage.getItem('isHero') == 1 && sessionStorage.getItem('hasLoaded')==0) {
+        sessionStorage.setItem('initalHeroLat', sessionStorage.getItem('latitude'));
+        sessionStorage.setItem('initialHeroLong', sessionStorage.getItem('longitude'));
+    }
+    if (sessionStorage.getItem('isCaller') == 1 && sessionStorage.getItem('isLoadedCaller') == 0) {
+        sessionStorage.setItem('initalHeroLat', latitude);
+        sessionStorage.setItem('initialHeroLong', longitude);
+    }
     var latLong2 = new google.maps.LatLng(latitude, longitude);
 
     //app.markerTwo = callersMarker;
@@ -160,11 +169,27 @@ function initialize(directionsDisplay) {
     directionsDisplay.setMap(app.map);
 }
 function calcRoute(directionsDisplay, directionsService, latLong2) {
-    var request = {
-        origin: app.marker.position,
-        destination: latLong2,
-        travelMode: 'WALKING' // google.maps.TravelMode.WALKING
-    };
+    
+    var heroLat = sessionStorage.getItem('initalHeroLat');
+    var heroLong = sessionStorage.getItem('initialHeroLong');
+    var heroMarker = new google.maps.LatLng(heroLat, heroLong);
+    var request;
+
+    if (sessionStorage.getItem('isCaller') == 1) {
+        request = {
+            origin: app.marker.position,
+            destination: heroMarker,
+            travelMode: 'WALKING' // google.maps.TravelMode.WALKING
+        };
+    }
+    else {
+        request = {
+            origin: heroMarker,
+            destination: latLong2,
+            travelMode: 'WALKING' // google.maps.TravelMode.WALKING
+        };
+    }
+
     directionsService.route(request, function (result, status) {
         if (status == google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(result);

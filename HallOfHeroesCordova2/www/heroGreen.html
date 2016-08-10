@@ -55,7 +55,9 @@
             $(document).ready(function () {
                 sessionStorage.setItem('isHero', 1);
                 //app.initialize();
-                //testAjax(sessionStorage.getItem('callerFname'),sessionStorage.getItem('callerLname'));
+                if (sessionStorage.getItem('hasLoaded') != 1) {
+                    testAjax(sessionStorage.getItem('callerFname'), sessionStorage.getItem('callerLname'));
+                }
                 var firstName = sessionStorage.getItem('callerFname');
                 var lastName = sessionStorage.getItem('callerLname');
                 //jQuery("#callerName").append(firstName + ' ' + lastName);
@@ -64,7 +66,6 @@
                 navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError);
                 getCallerLocation(firstName, lastName);
                 app.initialize();
-                sessionStorage.setItem('hasLoaded',1);
             });
             function callFeed()
              {

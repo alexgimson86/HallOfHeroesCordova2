@@ -45,7 +45,7 @@
         function initLocation() {
             navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError);
         }
-        initLocation();
+        //initLocation();
         $(document).ready(function () {
             //moved initialize to test stuff
             //app.initialize();
@@ -74,7 +74,6 @@
                         }
                     });
                 }, 5000);
-                sessionStorage.setItem('isLoadedCaller', 1);
             }
             else {
                 hideLoader();

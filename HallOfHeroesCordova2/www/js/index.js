@@ -179,12 +179,14 @@ var app = {
             var listener = google.maps.event.addListenerOnce(app.map, 'tilesloaded', function (evt) {
                 dropMarker(sessionStorage.getItem('heroLat'), sessionStorage.getItem('heroLong'));
                 sessionStorage.setItem('callerListener', listener);
+                sessionStorage.setItem('isLoadedCaller', 1);
             });
        }
        if (sessionStorage.getItem('isHero') == 1) {
            var listener = google.maps.event.addListenerOnce(app.map, 'tilesloaded', function (evt) {
                dropMarker(sessionStorage.getItem('callerLat'), sessionStorage.getItem('callerLong'));
                sessionStorage.setItem('heroListener', listener);
+               sessionStorage.setItem('hasLoaded', 1);
            });
        }
     },
@@ -204,22 +206,18 @@ function testAjax(firstName, lastName) {
         },
         dataType: "json",
         success: function (response) {
- /*           var url;
             var isValid = 0;
-            alert(response);
             response.forEach(function (callerInfo, i) {
+                alert(callerInfo.pendingCall);
                 if (callerInfo.pendingCall == 1) {
-                    url = callerInfo.avatarUrl;
                     isValid = 1;
                 }
             });
-            if (isValid === 1) 
-                jQuery('#heroAvatar').prepend('<img src="' + url + '"  style="width: auto; height: auto;max-width: 100px;max-height: 100px"/></div>');
-            else {
+            if(isValid !=1) {
                 alert("sorry but this caller has already been helped.");
                 window.location = "home.html";
             }
-        */},
+        },
         error: function (response) {
           //  alert("Error:" + response);
         }

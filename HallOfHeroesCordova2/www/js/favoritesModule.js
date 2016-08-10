@@ -123,21 +123,30 @@ var favoritesModule = (function($){
         });
 
         makeCallPending();
-        pushModule.sendPushToOne(color, senderName, uniqueTokens[0]);
-        setTimeout(function () {
-            pushModule.sendPushToOne(color, senderName, uniqueTokens[1]);
-        }, 500);
-        setTimeout(function () {
-            pushModule.sendPushToOne(color, senderName, uniqueTokens[2]);
-            if (color == "green")
-                window.location = "green.html";
-            else if (color == "yellow")
-                window.location = "yellow.html";
-            else if (color == "red")
-                window.location = "red.html";
-            else
-                alert("unrecognized color.");
-        }, 1000);
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var longitude = position.coords.longitude;
+            var latitude = position.coords.latitude;
+            sessionStorage.setItem("latitude", latitude);
+            sessionStorage.setItem("longitude", longitude);
+            updateLatLongModule.callUpdateFunction(function () {
+
+                pushModule.sendPushToOne(color, senderName, uniqueTokens[0]);
+                setTimeout(function () {
+                    pushModule.sendPushToOne(color, senderName, uniqueTokens[1]);
+                }, 500);
+                setTimeout(function () {
+                    pushModule.sendPushToOne(color, senderName, uniqueTokens[2]);
+                    if (color == "green")
+                        window.location = "green.html";
+                    else if (color == "yellow")
+                        window.location = "yellow.html";
+                    else if (color == "red")
+                        window.location = "red.html";
+                    else
+                        alert("unrecognized color.");
+                }, 1000);
+            });
+        }, function () { alert("error") });
         //pushModule.sendPushToAll(color,senderName);
       /* uniqueTokens.forEach(function (dat,i) {
            pushModule.sendPushToOne(color, senderName,uniqueTokens,pushModule.sendPushToOne);

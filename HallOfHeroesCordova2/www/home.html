@@ -40,15 +40,52 @@
     <script type="text/javascript" src="js/savePushRegistration.js"></script>
     <script type="text/javascript" src="js/getCallerLocation.js"></script>
     <title>Hall of Heroes</title>
+    <style>
+        .loaderTwo {
+            position: fixed;
+            margin-left: auto;
+            margin-right: auto;
+            left: 0;
+            right: 0;
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 80px;
+            height: 80px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
 <body>
-
     <div id="signal">
         <div class="signal-codes">
             <button onClick="callHome()">
                 <img src="img/x.png" />
             </button>
             <h3>My Signal is a...</h3>
+            <div class="loaderTwo" id="loaderTwo"></div>
+
             <div class="signal-options" onClick="callGreen()">
                 <h2 class="green">Code Green</h2>
                 <h4 class="green">
@@ -65,100 +102,102 @@
                 <h2 class="red">Code Red</h2>
                 <h4 class="red">Ex: I am being followed</h4>
             </div>
-        </div>
-        <div class="emergency">
-            <h2>Call 9-1-1</h2>
+            <div class="emergency">
+                <h2>Call 9-1-1</h2>
+            </div>
         </div>
     </div>
+       
 
 
-    <!-- Global Header Starts Here -->
-    <div class="header">
+        <!-- Global Header Starts Here -->
+        <div class="header">
 
-        <div class="edit">
-            <img src="img/edit.png" />
-            <h3>Edit</h3>
+            <div class="edit">
+                <img src="img/edit.png" />
+                <h3>Edit</h3>
+            </div>
+            <h1>My Hall Heroes</h1>
         </div>
-        <h1>My Hall Heroes</h1>
-    </div>
 
-    <div class="wrapper">
-        <div class="profile-main">
-            <!--<div class="award">
-                <div class="points"></div>
-                
+        <div class="wrapper">
+            <div class="profile-main">
+                <!--<div class="award">
+                    <div class="points"></div>
+
+                </div>
+
+                <div class="profile-img">
+                </div>-->
             </div>
 
-            <div class="profile-img">
-            </div>-->
-        </div>
-
-        <h3>My Favorite Hall Heroes</h3>
-
-        <div class="heroes" id="favoriteHeroes">
-            <div class="HH-hero">
-                <div class="plus-sign"><img src="img/plus.png" alt="edit favorite hero" onClick="callContacts()" /></div>
-                <div class="HH-people">
-                    <!--image of person goes here--><img src="img/guy1.jpg" />
+            <h3>My Favorite Hall Heroes</h3>
+            <div class="heroes" id="favoriteHeroes">
+                <div class="HH-hero">
+                    <div class="plus-sign"><img src="img/plus.png" alt="edit favorite hero" onClick="callContacts()" /></div>
+                    <div class="HH-people">
+                        <!--image of person goes here--><img src="img/guy1.jpg" />
+                    </div>
+                    <div class="HH-name">
+                        <!--name of person goes here--><h4>Heather Goh</h4>
+                        <!--name of person goes here--><h5>1 mi</h5>
+                    </div>
                 </div>
-                <div class="HH-name">
-                    <!--name of person goes here--><h4>Heather Goh</h4>
-                    <!--name of person goes here--><h5>1 mi</h5>
+                <div class="HH-hero">
+                    <div class="plus-sign"><img src="img/plus.png" alt="edit favorite hero" onClick="callContacts()" /></div>
+                    <div class="HH-people">
+                        <img src="img/girl1.jpg" />
+                    </div>
+                    <div class="HH-name">
+                        <h4>Heather Goh</h4>
+                        <h5>1 mi</h5>
+                    </div>
                 </div>
-            </div>
-            <div class="HH-hero">
-                <div class="plus-sign"><img src="img/plus.png" alt="edit favorite hero" onClick="callContacts()" /></div>
-                <div class="HH-people">
-                    <img src="img/girl1.jpg" />
-                </div>
-                <div class="HH-name">
-                    <h4>Heather Goh</h4>
-                    <h5>1 mi</h5>
-                </div>
-            </div>
-            <div class="HH-hero">
-                <div class="plus-sign"><img src="img/plus.png" alt="edit favorite hero" onClick="callContacts()" /></div>
-                <div class="HH-people">
-                    <img src="img/girl2.jpg" />
-                </div>
-                <div class="HH-name">
-                    <h4>Heather Goh</h4>
-                    <h5>1 mi</h5>
+                <div class="HH-hero">
+                    <div class="plus-sign"><img src="img/plus.png" alt="edit favorite hero" onClick="callContacts()" /></div>
+                    <div class="HH-people">
+                        <img src="img/girl2.jpg" />
+                    </div>
+                    <div class="HH-name">
+                        <h4>Heather Goh</h4>
+                        <h5>1 mi</h5>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <h3>Nearby Hall Heroes</h3>
-        <div class="heroes" id="nearbyHeroesOne">
-        </div>
-        <div class="heroes" id="nearbyHallHeroesTwo">
-        </div>
-
-
-    </div><!-- End wrapper -->
-    <!-- Begin Global Navigation -->
-    <nav>
-        <ul>
-            <li><button onClick="callHome()"><img src="img/home_on.png" /><h6>Home</h6></button></li>
-            <li><button onClick="callFeed()"><img src="img/news_off.png" /><h6>News</h6></button></li>
-
-            <li><button onclick="toggle_visibility('signal');"><img src="img/signal.png" class="signal_button" /><h6 class="signal_text">Signal</h6></button></li>
-
-            <li><button onClick="callMap()"><img src="img/map_off.png" /><h6>Zones</h6></button></li>
-            <li><button onClick="callStore()"><img src="img/store_off.png" /><h6>Store</h6></button></li>
+            <h3>Nearby Hall Heroes</h3>
+            <div class="heroes" id="nearbyHeroesOne">
+            </div>
+            <div class="heroes" id="nearbyHallHeroesTwo">
+            </div>
 
 
-        </ul>
+        </div><!-- End wrapper -->
+        <!-- Begin Global Navigation -->
+        <nav>
+            <ul>
+                <li><button onClick="callHome()"><img src="img/home_on.png" /><h6>Home</h6></button></li>
+                <li><button onClick="callFeed()"><img src="img/news_off.png" /><h6>News</h6></button></li>
+
+                <li><button onclick="toggle_visibility('signal');"><img src="img/signal.png" class="signal_button" /><h6 class="signal_text">Signal</h6></button></li>
+
+                <li><button onClick="callMap()"><img src="img/map_off.png" /><h6>Zones</h6></button></li>
+                <li><button onClick="callStore()"><img src="img/store_off.png" /><h6>Store</h6></button></li>
 
 
-    </nav>
-    <!-- End Global Navigation -->
+            </ul>
 
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript">
-            function init()
-            {
+
+        </nav>
+        <!-- End Global Navigation -->
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            function hideLoader() {
+                document.getElementById("loaderTwo").style.display = "none";
+            }
+            function init() {
                 favoritesModule.getFavoriteHeroes();
                 userModule.getUserInfo();
                 sessionStorage.setItem('isHero', 0);
@@ -167,33 +206,29 @@
                 sessionStorage.setItem('isMap', 0);
                 sessionStorage.setItem('isLoadedCaller', 0);
             }
-            function callFeed()
-             {
+            function callFeed() {
                 window.location = "feed.html";
-             }
+            }
 
-            function callHome()
-             {
+            function callHome() {
                 window.location = "home.html";
-             }
+            }
 
-            function callStore()
-             {
+            function callStore() {
                 window.location = "store.html";
-             }
+            }
 
-            function callSignal()
-             {
+            function callSignal() {
                 window.location = "signal.html";
-             }
+            }
 
-            function callRedeem()
-            {
+            function callRedeem() {
                 window.location = "redeem.html";
             }
 
             function callGreen()
             {
+                $('#loaderTwo').show();
                 //navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError);
                 var userName = sessionStorage.getItem('firstName') + ' ' + sessionStorage.getItem('lastName');
                 var latitude = sessionStorage.getItem('latitude');
@@ -207,46 +242,45 @@
                 favoritesModule.makeCallToHeroes("green", userName, latLong);
                 //favoritesModule.makeCallToHeroes("green", userName);
             }
-             function callYellow()
-            {
-                 var userName = sessionStorage.getItem('firstName') + ' ' + sessionStorage.getItem('lastName');
-                 sessionStorage.setItem('color', 'yellow');
-                 favoritesModule.makeCallToHeroes("yellow", userName);
+            function callYellow() {
+                var userName = sessionStorage.getItem('firstName') + ' ' + sessionStorage.getItem('lastName');
+                sessionStorage.setItem('color', 'yellow');
+                favoritesModule.makeCallToHeroes("yellow", userName);
                 //favoritesModule.makeCallToHeroes("yellow", userName);
             }
-			function callRed()
-            {
-			    var userName = sessionStorage.getItem('firstName') + ' ' + sessionStorage.getItem('lastName');
-			    sessionStorage.setItem('color', 'red');
+            function callRed() {
+                var userName = sessionStorage.getItem('firstName') + ' ' + sessionStorage.getItem('lastName');
+                sessionStorage.setItem('color', 'red');
                 favoritesModule.makeCallToHeroes("red", userName);
                 //favoritesModule.makeCallToHeroes("red", userName);
             }
-            function callContacts()
-            {
+            function callContacts() {
                 window.location = "contacts.html";
             }
 
-            function callMap()
-            {
+            function callMap() {
                 window.location = "map.html";
-               // window.location = "heroGreen.html";
+                // window.location = "heroGreen.html";
             }
             init();
             app.initialize();
             getClosestHeroesModule.getAllHeroesInfo();
+            $(document).ready(function () {
+                hideLoader();
+            })
 
             function toggle_visibility(id) {
-               var e = document.getElementById(id);
-               if(e.style.display == 'block')
-                  e.style.display = 'none';
-               else
-                  e.style.display = 'block';
+                var e = document.getElementById(id);
+                if (e.style.display == 'block')
+                    e.style.display = 'none';
+                else
+                    e.style.display = 'block';
             }
-			window.setInterval(function () {
+            window.setInterval(function () {
                 favoritesModule.getFavoriteHeroes();
                 getClosestHeroesModule.getAllHeroesInfo();
             }, 10000);
-    </script>
+        </script>
 </body>
 
 </html>
